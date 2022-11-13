@@ -1,13 +1,609 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import '~antd/dist/antd.css';
+.body {
+    background-color: white;
+    width: 100%;
+    height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/* CSS for NavBar structure start here*/
+
+.navbar {
+    background-color:#001529;
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    /* border: 1px solid green; */
+
 }
+
+.navbarTop {
+    width: 100%;
+    background-color: #001529;
+    padding: 14px 0px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.navbarTopLeft {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 10%;
+}
+
+.logo {
+    color: white;
+    font-style: oblique;
+    font-size: larger;
+    text-decoration: none;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.logo:hover {
+    text-decoration: none;
+    outline: none;
+    color: white;
+}
+
+.searchMovies {
+    width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-left: 8px;
+    margin-right: 8px;
+    text-align: left;
+}
+
+.navbarTopRight {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: relative;
+    right: 10%;
+}
+
+.currentLocationOptions {
+    /* padding: 5px; */
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(62, 60, 60);
+}
+
+.signIn {
+    background-color: rgb(221, 79, 79);
+    padding: 2px 15px 2px 15px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.menu {
+    transform: scale(1.5);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbarBottom {
+    width: 100%;
+    background-color: rgb(110, 105, 105);
+    padding: 11px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.navbarBottomAllOptionsLeft {
+    width: 50%;
+    /* border: 1px solid red; */
+    position: relative;
+    left: 10%;
+}
+
+.navbarBottomOptionsLeft {
+    text-decoration: none;
+    font-size: large;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: aliceblue;
+    opacity: 0.9;
+}
+
+.navbarBottomOptionsLeft:hover {
+    text-decoration: none;
+    outline: none;
+    color: aliceblue;
+}
+
+.navbarBottomAllOptionsRight {
+    width: 50%;
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 10%;
+}
+
+.navbarBottomOptionsRight {
+    text-decoration: none;
+    outline: none;
+    font-size: large;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: aliceblue;
+    opacity: 0.9;
+}
+
+.navbarBottomOptionsRight:hover {
+    text-decoration: none;
+    outline: none;
+    color: aliceblue;
+}
+
+/* CSS for NavBar structure end here*/
+
+
+
+/* CSS for structure  of Sliding movies in horizontal, start here*/
+
+#carouselExampleControls {
+    position: relative;
+    top: 125px;
+}
+
+.RecommendedMoviesText {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 8px;
+}
+
+.carousel-inner {
+    background-color: white;
+    border-radius: 10px;
+    width: 86%;
+    position: relative;
+    left: 7%;
+}
+
+.carousel-item1-Row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.carousel-item1 {
+    /* border: 1px solid red; */
+    /* background-color: pink; */
+    width: 190px;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-left: 30x;
+    margin-right: 30px;
+}
+
+.d-block_w-100 {
+    height: 300px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.carousel-item1-ads {
+    /* border: 1px solid red; */
+    /* background-color: pink; */
+    width: 100%;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-left: 30x;
+    margin-right: 30px;
+}
+
+.d-block_w-100-ads {
+    height: 300px;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.carousel-item-like-icon-count {
+    width: 200px;
+    word-break: break-all;
+    background-color: black;
+    padding: 4px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.carousel-item-likes-Icon {
+    color: green;
+    margin-left: 5px;
+    margin-right: 5px;
+    transform: scale(0.7);
+}
+
+.star {
+    color: red;
+    margin-left: 5px;
+    margin-right: 5px;
+    transform: scale(0.8);
+
+}
+
+.carousel-item-likes-count {
+    color: white;
+    opacity: 0.7;
+    font-weight: bold;
+    font-size: 12px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+}
+
+.carousel-item-Title {
+    width: 170px;
+    word-break: break-all;
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 5px;
+}
+
+
+.carousel-item-Formate {
+    width: 170px;
+    word-break: break-all;
+    font-size: 17px;
+    color: black;
+    opacity: 0.7;
+    margin-left: 5px;
+    margin-top: 15px;
+    position: relative;
+    bottom: 10px;
+
+    border: 1px sloid red;
+}
+
+
+.carousel {
+    background: #eee;
+}
+
+.carousel-cell {
+    width: 66%;
+    /* height: 260px; */
+    margin: 10px 10px 0px 0px;
+    background: white;
+    border-radius: 5px;
+    counter-increment: gallery-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    font-size: 80px;
+    height: 260px;
+    color: white;
+}
+
+#carouselExampleControls {
+    background-color: white;
+
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: gray;
+    border-radius: 40px;
+    height: 17px;
+    width: 20px;
+    -webkit-padding-end: 40px;
+    transform: scale(1.5);
+    -webkit-filter: opacity(1) drop-shadow(0 0 0 rgb(144, 25, 25));
+    filter: opacity(1) drop-shadow(0 0 0 gray);
+}
+
+.carousel-control-next-icon {
+    position: relative;
+    right: 175px;
+}
+
+.carousel-control-prev-icon {
+    position: relative;
+    left: 155px;
+}
+
+
+/* CSS for structure  of Sliding movies in horizontal, end here*/
+
+
+
+
+
+/* CSS for structure  of Searching movies , start here*/
+
+
+.SearchFileterfixed {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.closeSearch {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    z-index: 5;
+}
+
+.searchpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchnav {
+    width: 100%;
+    background-color: rgb(228, 228, 228);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.searchMovies2 {
+    padding: 10px;
+    z-index: 2;
+}
+
+.searchedmoviespage {
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    width: 594px;
+    position: relative;
+    bottom: 38px;
+    /* padding: 5px; */
+    box-shadow: inset 0 -3em 3em rgb(255 255 255 / 10%), 0 0 0 2px rgb(255 255 255), 0.3em 0.3em 1em rgb(0 0 0 / 30%);
+
+    max-height: 400px;
+    overflow-y: scroll;
+    z-index: 3;
+}
+
+/* For Hide the Scroll bar of searchedmoviespage class page */
+.searchedmoviespage::-webkit-scrollbar {
+    display: none;
+}
+
+.searchmoviesfoundAndIcon {
+    border-bottom: 1px solid rgb(227, 223, 223);
+    border-radius: 2px;
+    padding: 3px 5px 3px 5px;
+
+}
+
+.searchmoviesfoundalert {
+    color: black;
+    font-size: 17px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.searchmoviesfoundalert::-webkit-scrollbar {
+    display: none;
+}
+
+.searchmoviesfoundresult {
+    color: red;
+    font-weight: bold;
+}
+
+.searchmoviesfoundAndIcon:hover {
+    background-color: rgb(246, 244, 244);
+    ;
+}
+
+.foundIcon {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+
+.searchmoviesfound {
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+    line-height: 18px;
+}
+
+
+/* CSS for structure  of Searching movies , end here*/
+
+
+
+
+
+
+
+
+/* CSS for structure  of backgraoung page content of Searching movies page, start here*/
+
+
+
+.SearchBackgroundItems {
+    z-index: 2;
+    position: fixed;
+    top: 150px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.searchbackgrounfNAv {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.searchbackgrounfNAvLeft {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    position: relative;
+    left: 14%;
+}
+
+.searchbackgrounfNAvLeft1 {
+    margin: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 5px;
+
+    color: rgb(153, 153, 153);
+    background: rgb(242, 242, 242);
+    border: 1px solid rgb(242, 242, 242);
+}
+
+.searchbackgrounfNAvRight {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 14%;
+
+}
+
+
+.searchbackgrounfNAvRight1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 2px;
+    font-size: 10px;
+    cursor: pointer;
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+    transition: all 0.2s ease-in-out 0s;
+    color: rgb(51, 51, 51);
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+
+    border: 1px solid rgb(204, 204, 204);
+}
+
+
+.searchbottom {
+    width: 74%;
+    ;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 14%;
+}
+
+.searchbottomb1 {
+    /* border: 1px solid red; */
+    width: 25%;
+
+    overflow-x: scroll;
+}
+
+.searchbottomb1::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+.searchbottomb1ul {
+    list-style: none;
+}
+
+.searchbottomb1li1 {
+    cursor: default;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(220, 53, 88);
+    padding: 6px 0px 3px;
+    width: auto;
+    opacity: 1;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.searchbottomb1li {
+    padding: 6px 10px 3px 0px;
+
+    /* margin-right: 5px; */
+    user-select: none;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out 0s;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    line-height: 1.4;
+    position: relative;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+}
+
+.searchbottomb1lispan {
+    display: inline-block;
+    content: "new";
+    padding: 3px;
+    color: rgb(255, 203, 1);
+    text-transform: uppercase;
+    font-size: 9px;
+    text-decoration: none;
+}
+
+
+.currentLocationOptions{
+   background-color: white;
+}
+
+
+
+
+
+
