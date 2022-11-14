@@ -1,0 +1,64 @@
+
+.ticketPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booklogo {
+    height: 60px;
+    width: 200px;
+}
+
+.ticketContainer {
+    width: 25vw;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
+    background-color: #010101;
+}
+
+.insidetkt {
+    background-color: #fff;
+}
+
+.ticketHead {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.movieInfo {
+    margin-left: 30px;
+}
+
+.moviePoster {
+    height: 200px;
+    width: 180px;
+    border-radius: 10px;
+}
+
+.ticketMid {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.qrCode {
+    margin-left: 100px;
+    height: 220px;
+    width: 220px;
+}
+
+.finalLinks {
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+

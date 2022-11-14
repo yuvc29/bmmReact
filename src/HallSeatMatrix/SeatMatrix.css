@@ -1,0 +1,225 @@
+
+.seatmatrixbody {
+    z-index: 4;
+    position: absolute;
+    top: 0px;
+    background-color: white;
+    width: 100%;
+
+    /* border: 1px solid red; */
+}
+
+
+/* CSS for structure  of Navbar and timing Button Seat Matrix page content for select the seat, start here*/
+
+
+.movie_desc_bar {
+    font-size: large;
+    background-color: #1f2533;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+
+    /* border: 1px solid green; */
+    z-index: 3;
+}
+
+.movie_desc_bar-Left {
+    color: #fff;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 5%;
+}
+
+.movie_desc_bar-Left-Top {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.movie_desc_bar-Left-Down {
+    font-size: 12px;
+
+}
+
+.movie_desc_bar-Right {
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 5%;
+}
+
+.movie_desc_bar-Right-btn {
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid white;
+    margin: 0px 8px;
+    color: white;
+    background-color: #1f2533;
+    font-size: 12px;
+}
+
+.MovieTimingInOneTheater {
+    /* border: 1px solid red; */
+    position: sticky;
+    top: 69.5px;
+    padding: 10px;
+    background-color: white;
+    margin: 5px 0px 0px 3%;
+    z-index: 1;
+}
+
+.MovieTimingInOneTheaterBtn {
+    border-radius: 4px;
+    border: 1px solid #2dc492;
+    margin: 0px 10px;
+    padding: 7px 13px;
+    font-size: 12px;
+
+
+}
+
+
+/* CSS for structure  of Navbar and timing Button Seat Matrix page content for select the seat, end here*/
+
+
+
+
+
+/* CSS for structure  of content of Seat Matrix page content for select the seat, start here*/
+
+
+.seatMatrixOfHall {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin-top: 100px;
+
+}
+
+
+.seatMatrixOfHallLeftCount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.seatMatrixOfHallLeftCountshow {
+    margin: 5px;
+    position: relative;
+    bottom: 18px;
+    height: 31px;
+    padding: 2px;
+    /* border: 1px solid red; */
+}
+
+.seatMatrixOfHallLeft {
+    margin: 0px 25px;
+}
+
+.seatMatrixOfHallRight {
+    margin: 0px 25px;
+}
+
+.seatMatrixOfHallRightMain {
+    margin: 0px 25px;
+}
+
+.hall {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #505050;
+    margin: 5px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    padding-top: 2px;
+    cursor: pointer;
+}
+
+.selected {
+    font-size: 0.5rem;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background: #03fc2d;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    padding-top: 2px;
+    cursor: pointer;
+}
+
+.occupied {
+    font-size: 0.5rem;
+    width: 30px;
+    height: 30px;
+    background: #F84464;
+    margin: 5px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    padding-top: 2px;
+    cursor: pointer;
+}
+
+
+.seat-count {
+    font-size: medium;
+    text-align: right;
+
+}
+
+
+
+.paymentBar {
+
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paymentBarBtn {
+    background: #f84464;
+    color: #fff;
+
+    width: 300px;
+    height: 100%;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 16%);
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 40px;
+    max-width: 400px;
+
+    border: none;
+}
+
+
+
+
+
+
+
+
+

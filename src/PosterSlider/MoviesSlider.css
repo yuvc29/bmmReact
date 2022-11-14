@@ -1,0 +1,86 @@
+
+#carouselExampleControls {
+    position: relative;
+    top: 125px;
+}
+
+.RecommendedMoviesText {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 8px;
+    width: 65%;
+    position: relative;
+    left: 16.5%;
+    /* border: 1px solid red; */
+}
+
+.carousel-inner {
+    background-color: white;
+    border-radius: 10px;
+    width: 86%;
+    position: relative;
+    left: 7%;
+}
+
+.carousel-item1-Row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.carousel {
+    background: #eee;
+}
+
+.carousel-cell {
+    width: 66%;
+    /* height: 260px; */
+    margin: 10px 10px 0px 0px;
+    background: white;
+    border-radius: 5px;
+    counter-increment: gallery-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    font-size: 80px;
+    height: 260px;
+    color: white;
+}
+
+#carouselExampleControls {
+    background-color: white;
+
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: gray;
+    border-radius: 40px;
+    height: 17px;
+    width: 20px;
+    -webkit-padding-end: 40px;
+    transform: scale(1.5);
+    -webkit-filter: opacity(1) drop-shadow(0 0 0 rgb(144, 25, 25));
+    filter: opacity(1) drop-shadow(0 0 0 gray);
+}
+
+.carousel-control-next-icon {
+    position: relative;
+    right: 175px;
+}
+
+.carousel-control-prev-icon {
+    position: relative;
+    left: 155px;
+}
+
+
+
+
+
+
+

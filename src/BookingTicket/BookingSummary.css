@@ -1,0 +1,128 @@
+.checkout {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: absolute;
+    top: 69.5px;
+    z-index: 2;
+}
+
+.BackToSeatMatrix {
+    background: #2dc492;
+    color: white;
+    position: absolute;
+    top: 81px;
+    left: 14px;
+    z-index: 3;
+}
+
+.RecieptAndDetails {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+.receipt {
+    width: 50%;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* border: 1px solid red; */
+}
+
+
+
+.receiptBookingSummary {
+
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: left;
+    color: #c02c39;
+
+    padding: 10px;
+}
+
+.movieNameandticketbook {
+    padding: 10px;
+}
+
+.movieNamebook {
+    width: 50%;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.movieTicketbookinfo {
+    margin: 10px;
+}
+
+.TicketAmountInfo {
+    display: flex;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+.TicketAmountInfoPrice {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+
+}
+
+.TicketAmountInfoPriceAmount {
+    font-weight: bold;
+}
+
+
+.SelectedTicketColletionType {
+    padding: 10px;
+    margin: 100px 10px 10px 10px;
+    text-align: center;
+}
+
+
+.note {
+    margin: 100px;
+}
+
+
+.cardExpiry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cardExpiry {
+    padding: 5px 25px;
+}
+
+.ContactCardDetailEnter {
+    border-top: 2px solid gray;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

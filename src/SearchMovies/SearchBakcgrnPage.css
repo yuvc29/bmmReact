@@ -1,0 +1,144 @@
+
+.SearchBackgroundItems {
+    z-index: 2;
+    position: fixed;
+    top: 150px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.searchbackgrounfNAv {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.searchbackgrounfNAvLeft {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    position: relative;
+    left: 14%;
+}
+
+.searchbackgrounfNAvLeft1 {
+    margin: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 5px;
+
+    color: rgb(153, 153, 153);
+    background: rgb(242, 242, 242);
+    border: 1px solid rgb(242, 242, 242);
+}
+
+.searchbackgrounfNAvRight {
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 14%;
+
+}
+
+
+.searchbackgrounfNAvRight1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 2px;
+    font-size: 10px;
+    cursor: pointer;
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+    transition: all 0.2s ease-in-out 0s;
+    color: rgb(51, 51, 51);
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+
+    border: 1px solid rgb(204, 204, 204);
+}
+
+
+.searchbottom {
+    width: 74%;
+    ;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 14%;
+}
+
+.searchbottomb1 {
+    /* border: 1px solid red; */
+    width: 25%;
+
+    overflow-x: scroll;
+}
+
+.searchbottomb1::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+.searchbottomb1ul {
+    list-style: none;
+}
+
+.searchbottomb1li1 {
+    cursor: default;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(220, 53, 88);
+    padding: 6px 0px 3px;
+    width: auto;
+    opacity: 1;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.searchbottomb1li {
+    padding: 6px 10px 3px 0px;
+
+    /* margin-right: 5px; */
+    user-select: none;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out 0s;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    line-height: 1.4;
+    position: relative;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+}
+
+.searchbottomb1lispan {
+    display: inline-block;
+    content: "new";
+    padding: 3px;
+    color: rgb(255, 203, 1);
+    text-transform: uppercase;
+    font-size: 9px;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
