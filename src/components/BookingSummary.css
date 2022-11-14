@@ -1,0 +1,147 @@
+
+.checkout{
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: row;
+}
+.note{
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.details{
+    padding: 5px;
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: bisque;
+}
+
+.heading{
+    background-color: #f14c63;
+}
+
+.payButton{
+    height: 40px;
+    width: 20%;
+    border-radius: 10px;
+    margin-left: 25vw;
+    background-color: #f14c63;
+}
+.payButtonContainer{
+    margin-top: 50px;
+    /* background-color: black; */
+}
+
+.receipt{
+    padding: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color:rgb(228, 221, 234);
+    /* width: 30%; */
+}
+
+.form {
+  background: #fff;
+  max-width: 500px;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 40px #737272e8;
+  position: relative;
+}
+
+.movieName{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subTotal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.amountPayable{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(240, 190, 103);
+}
+.cardExpiry{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+
+/* ********* */
+/* TICKET PAGE CSS */
+/* ********* */
+
+.ticketPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booklogo{
+    height: 60px;
+    width:200px;
+}
+
+.ticketContainer{
+    width: 25vw;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
+    background-color: #010101;
+}
+
+.insidetkt{
+    background-color: #fff;
+}
+
+.ticketHead{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.movieInfo{
+    margin-left: 30px;
+}
+
+.moviePoster{
+    height: 200px;
+    width: 180px;
+    border-radius: 10px;
+}
+
+.ticketMid{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+.qrCode{
+    margin-left: 100px;
+    height: 220px;
+    width: 220px;
+}
+
+.finalLinks{
+    margin-top: 10px;
+}
