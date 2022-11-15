@@ -1,36 +1,19 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import {Tooltip, Table, Button, Col, Form, Input, Row, Select } from 'antd';
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import './Form.css'
+import axios from 'axios'
+import GenreForm from './GenreForm';
+// import Genres from './Genres'
+// import Actors from './Actors';
+
+import CastForm from './CastForm';
 const { Option } = Select;
-const AdvancedSearchForm = () => {
 
-  const [fields, setFields ] = useState({
-    title: "Uunchai",
-    releaseDate: "11 Nov 2022",
-    length: 129,
-    language: "Hindi",
-    ageRating: "U",
-    format: "2D/3D",
-    poster:"https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/uunchai-et00335262-1665386678.jpg",
-    genre:[
-        "Adventure", "Drama", "Family" 
-    ],
-    cast:[
-      {
-          firstName:"Amitabh",
-          lastName:"Bachchan",
-          image:"https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/amitabh-bachchan-138-12-09-2017-02-34-37.jpg"
-      },
-      {
-          firstName:"Rekha",
-          lastName:"Bachchan",
-          image:"https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/rekha-1864-22-09-2017-03-36-15.jpg"
-      }
 
-    ],
-    description:"Three friends take a trek to the Everest Base Camp which becomes a personal, emotional and spiritual journey while battling their physical limitations and discovering the true meaning of freedom."
-  })
+
+const AdvancedSearchForm = ({fields, setFields}) => {
+
 
   const [expand, setExpand] = useState(false);
   const [form] = Form.useForm();
@@ -38,7 +21,8 @@ const AdvancedSearchForm = () => {
   const getFields = () => {
     const count = expand ? 10 : 6;
     const children =[ 
-      <Col span={8}>
+      
+      <Col span={16}>
         <Form.Item
           name={`title`}
           label={`Title`}
@@ -49,7 +33,7 @@ const AdvancedSearchForm = () => {
             },
           ]}
         >
-          <Input value={fields.title} placeholder="Title" onChange={(e)=>{setFields({...fields, title: e.target.value })}}/>
+          <Input style = {{width:'300px'}}value={fields.title} defaultValue={fields.title} placeholder="title" onChange={(e)=>{setFields({...fields, title: e.target.value })}}/>
         </Form.Item>
       </Col>
       ,
@@ -57,45 +41,118 @@ const AdvancedSearchForm = () => {
       <Col span={8}>
         <Form.Item
           name={`releaseDate`}
-          label={`Title`}
-          rules={[
-            {
-              required: true,
-              message: 'Input something!',
-            },
-          ]}
+          label={`Release Date`}
         >
-          <Input value={fields.title} placeholder="Title" onChange={(e)=>{setFields({...fields, title: e.target.value })}}/>
+          <Input value={fields.releaseDate} placeholder="DD/MM/YYYY" defaultValue={fields.releaseDate} onChange={(e)=>{setFields({...fields, releaseDate: e.target.value })}}/>
         </Form.Item>
       </Col>
-    ]
-    // for (let i = 0; i < count; i++) {
-    //   children.push(
-    //     <Col span={8} key={i}>
-    //       <Form.Item
-    //         name={`field-${i}`}
-    //         label={`Field ${i}`}
-    //         rules={[
-    //           {
-    //             required: true,
-    //             message: 'Input something!',
-    //           },
-    //         ]}
-    //       >
-    //         {i % 3 !== 1 ? (
-    //           <Input placeholder="placeholder" />
-    //         ) : (
-    //           <Select defaultValue="2">
-    //             <Option value="1">1</Option>
-    //             <Option value="2">
-    //               longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong
-    //             </Option>
-    //           </Select>
-    //         )}
-    //       </Form.Item>
-    //     </Col>
-    //   );
-    // }
+      ,
+      <Col span={8}>
+        <Form.Item
+          name={`expiryDate`}
+          label={`Expiry Date`}
+        >
+          <Input value={fields.expiryDate} placeholder="DD/MM/YYYY" defaultValue={fields.expiryDate} onChange={(e)=>{setFields({...fields, expiryDate: e.target.value })}}/>
+        </Form.Item>
+      </Col>
+      ,
+      <Col span={8}>
+        <Form.Item
+          name={`length`}
+          label={`Movie Length`}
+        >
+          <Input value={fields.length} placeholder="in minutes" defaultValue={fields.length} onChange={(e)=>{setFields({...fields, length: e.target.value })}}/>
+        </Form.Item>
+      </Col>,
+      <Col span={8}>
+        <Form.Item
+          name={`language`}
+          label={`Language`}
+        >
+          <Select defaultValue= {fields.language} onChange={(e)=>{setFields({...fields, language: e})}}>
+            <Option value="Hindi">Hindi</Option>
+            <Option value="English">English</Option>
+            <Option value="Bengali">Bengali</Option>
+            <Option value="Tamil">Tamil</Option>
+          </Select>
+        </Form.Item>
+      </Col>,
+      <Col span={8}>
+        <Form.Item
+          name={`ageRating`}
+          label={`Age Rating`}
+        >
+          <Select defaultValue={fields.ageRating} onChange={(e)=>{setFields({...fields, ageRating: e})}}>
+            <Option value="U">U</Option>
+            <Option value="U/A">U/A</Option>
+            <Option value="A">A</Option>
+          </Select>
+        </Form.Item>
+      </Col>,
+      <Col span={8}>
+        <Form.Item
+          name={`format`}
+          label={`Visual Format`}
+        >
+          <Select defaultValue={fields.format} onChange={(e)=>{setFields({...fields, format: e})}}>
+            <Option value="2D">2D</Option>
+            <Option value="3D">3D</Option>
+            <Option value="2D/3D">2D/3D</Option>
+          </Select>
+        </Form.Item>
+      </Col>
+      ,
+
+      <Col span={8}>
+        <Form.Item
+          name={`rating`}
+          label={`IMDB Rating`}
+        >
+          <Input value={fields.rating} placeholder="*/5" defaultValue={fields.rating} onChange={(e)=>{setFields({...fields, rating: e.target.value })}}/>
+        </Form.Item>
+      </Col>
+    ,
+        <Col span={12}>
+          <Form.Item
+            name={`poster`}
+            label={`Poster Link`}
+          >
+            <Input value={fields.poster} defaultValue={fields.poster} placeholder="link" onChange={(e)=>{setFields({...fields, poster: e.target.value })}}/>
+          </Form.Item>
+        </Col>,
+        // <Col span={12}>
+        //   <Actors fields = {fields} setFields = {setFields}/>
+        // </Col>,
+        <Col span={12}>
+          <Form.Item
+            name={`trailer`}
+            label={`Trailer Link`}
+          >
+            <Input value={fields.trailer} defaultValue={fields.trailer} placeholder="link" onChange={(e)=>{setFields({...fields, trailer: e.target.value })}}/>
+          </Form.Item>
+        </Col>,
+        <Col span={12}>
+          <Form.Item
+            name={`description`}
+            label={`Description`}
+          >
+            <Input.TextArea style = {{width:'450px', height: '100px'}} defaultValue={fields.description} value={fields.poster} placeholder="Description" onChange={(e)=>{setFields({...fields, poster: e.target.value })}}/>
+          </Form.Item>
+        </Col>
+        // <Col span={12}>
+        //   <Form.Item
+        //     name={`genre`}
+        //     label={`Genres`}
+        //   >
+        //     <Select
+        //       defaultValue={fields.genre}
+        //       mode="multiple" allowClear style={{ width: '450px', }} 
+        //       placeholder="Please select" 
+        //       onChange={(e)=>{setFields({...fields, genre: e.target.value})}} options={Genres}
+        //     />
+        //   </Form.Item>
+        // </Col>,
+      ]
     return children;
   };
   const onFinish = (values) => {
@@ -116,9 +173,6 @@ const AdvancedSearchForm = () => {
             textAlign: 'right',
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Search
-          </Button>
           <Button
             style={{
               margin: '0 8px',
@@ -144,98 +198,67 @@ const AdvancedSearchForm = () => {
     </Form>
   );
 };
-const MovieForm = () => (
+const MovieForm = () =>{
+  const [movieId, setMovieId] = useState(0)
+  const [fields, setFields ] = useState({
+
+    title: "Uunchai",
+    releaseDate: "03/11/2022",
+    expiryDate:"10/12/2022",
+    length: 129,
+    trailer: "https://www.youtube.com/watch?v=rerwio14Fes",
+    language: "Hindi",
+    ageRating: "U",
+    rating:4,
+    format: "2D/3D",
+    poster:"https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/uunchai-et00335262-1665386678.jpg",
+    description:"Three friends take a trek to the Everest Base Camp which becomes a personal, emotional and spiritual journey while battling their physical limitations and discovering the true meaning of freedom."
+  })
+
+
+const postMovie = ()=>{
+  const fetchData = async()=>{
+    try{
+      const response = await axios.post("http://localhost:8080/movie", fields)
+      const data = response.data;
+      setMovieId(data.movieId)
+      // .then(response => response.json())
+    }
+    catch(err){
+      alert("Failed")
+    }
+  }
+  fetchData();
+
+  // try{
+  //   axios
+  //   .post('http://localhost/8080/movie', fields)
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     // if(data.status === 200){
+  //       // setMovieId(data.movieId)
+  //     //   alert("Theater added")
+  //     // }
+  //     alert("Movie added")
+  //   })
+  // }
+  // catch(err){
+  //   alert("Failed")
+  // }
+}
+
+  
+  return (
   <div>
-    <AdvancedSearchForm />
-    <Table columns={columns} dataSource={data} />
+    <AdvancedSearchForm fields = {fields} setFields = {setFields}/> 
+    <Button style = {{margin: '10px'}} onClick={postMovie}>Post Movie</Button>
+    {/* <Actors fields = {cast} setFields = {setCast}/> */}
+      {/* <CastForm movieId = {movieId}/>
+      <GenreForm movieId= {movieId}/> */}
   </div>
-);
+);}
 export default MovieForm;
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-    width: 150,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-    width: 80,
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address 1',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'Long Column Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 2',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 3',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'Long Column',
-    dataIndex: 'address',
-    key: 'address 4',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 2 Lake Park, London No. 2 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-  },
-];
+
+

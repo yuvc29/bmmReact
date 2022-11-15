@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import Admin from './Components/Admin'
+import Admin from './Components/Admin'
+import { BrowserRouter } from 'react-router-dom';
+// import ShowForm from './Components/ShowForm';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
-    {/* <Admin /> */}
+    {/* <App/> */}
+    <BrowserRouter>
+      <Admin />
+    </BrowserRouter>
+    {/* <ShowForm/> */}
   </React.StrictMode>
 );
 
