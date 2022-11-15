@@ -4,6 +4,7 @@ import './MainNavbar.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchMovies from '../SearchMovies/SerachMovies';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -34,9 +35,11 @@ function Navbar() {
             <div className="navbarTop">
                 <div className="navbarTopLeft">
                     <a href="_blank" className="logo">BookmyMovie</a>
+                    <Link to="/movie-details-By- search movie-name">
                     <input type="text" className="searchMovies"
                         placeholder='search for movies, plays, events, sports ....'
                         onClick={() => { ShowList() }} />
+                       </Link>
                 </div>
                 <div className="navbarTopRight">
                     <MenuIcon className="menu"></MenuIcon>
@@ -44,7 +47,7 @@ function Navbar() {
                     <div className="currentLocation">
                         <select className="currentLocationOptions">
                             <option  value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
-                            <option value="NOIDA" className="currentLocationCity">NOIDA</option>
+                            <option value="NOIDA" selected className="currentLocationCity">NOIDA</option>
                             <option value="GAJIYABAD" className="currentLocationCity">GAJIYABAD</option>
                             <option value="GURUGRAM" className="currentLocationCity">GURUGRAM</option>
                             <option value="PUNJAB" className="currentLocationCity">PUNJAB</option>

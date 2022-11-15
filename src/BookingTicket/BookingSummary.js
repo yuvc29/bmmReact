@@ -5,21 +5,45 @@ import './BookingSummary.css';
 
 import { RadioButton, RadioGroup } from "react-radio-buttons";
 import { Button } from "antd";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 
 function BookingSummary() {
 
   const location = useLocation();
-  const { title, Hall_Name, Total_ticket, total_ticket_price, seat_type } = location.state;
+  const { title, Hall_Name, Total_ticket, total_ticket_price, seat_type, poster, selected_Seat_Num } = location.state;
 
-   let final_ticket_price=total_ticket_price + 125 -25;
+  // const seatNumber = JSON.parse(selected_Seat_Num);
+  // console.log(" This is seat " + seatNumber[0].row);
 
-  const [creditCardNum, setCreditCardNum] = useState('#### #### #### ####');
-  const [cardHolder, setCardHolder] = useState('Your Full Name');
-  const [expireMonth, setExpireMonth] = useState("MM");
-  const [expireYear, setExpireYear] = useState("YYYY");
+
+  let final_ticket_price = total_ticket_price + 125 - 25;
+
+  const [redirectPage, setRedirectPage] = useState('');
+
+  const [emailAdress, setEmailAdress] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
+
+  const [creditCardNum, setCreditCardNum] = useState('');
+  const [cardHolder, setCardHolder] = useState('');
+  const [expireMonth, setExpireMonth] = useState('');
+  const [expireYear, setExpireYear] = useState('');
+  const [creditPass, setCreditPass] = useState('');
+
+
+
+
+  const handleEmailAdress = (e) => {
+    setEmailAdress(e.target.value);
+    // console.log(e.target.value);
+  }
+
+  const handlePhoneNum = (e) => {
+    setPhoneNum(e.target.value);
+    // console.log(e.target.value);
+  }
+
 
   const handleCardNumber = (e) => {
     setCreditCardNum(e.target.value);
@@ -39,8 +63,20 @@ function BookingSummary() {
     setExpireYear(e.target.value);
   };
 
-  const handlePayButton = () => {
-    console.log("random")
+  const handleCreditPass = (e) => {
+    setCreditPass(e.target.value);
+  }
+
+
+  const validation = () => {
+    if (emailAdress === '' || phoneNum === '' || creditCardNum === '' || creditPass === '' || cardHolder === ''
+      || expireMonth === '' || expireYear === '') {
+      alert(`${cardHolder} Please fill all details for bokking seats`);
+      setRedirectPage('/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details');
+    }
+    else {
+      setRedirectPage('/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/Ticket-details');
+    }
   }
 
   return (
@@ -64,9 +100,11 @@ function BookingSummary() {
 
                 <div className="TicketAmountInfoPrice TicketAmountInfoPriceAmount">
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="email" placeholder="Enter Email Address" required />
+                    type="email" placeholder="Enter Email Address" required
+                    onChange={(e) => { handleEmailAdress(e) }} />
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="tel" placeholder="Enter Phone Number" required />
+                    type="tel" placeholder="Enter Phone Number" required
+                    onChange={(e) => { handlePhoneNum(e) }} />
                 </div>
 
               </div>
@@ -87,9 +125,11 @@ function BookingSummary() {
 
                 <div className="TicketAmountInfoPrice TicketAmountInfoPriceAmount">
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="email" placeholder="Enter Card Numbe" required />
+                    type="email" placeholder="Enter Card Numbe" required
+                    onChange={(e) => { handleCardNumber(e) }} />
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="tel" placeholder="Card Holder Name" required />
+                    type="tel" placeholder="Card Holder Name" required
+                    onChange={(e) => { handleHolderName(e) }} />
                 </div>
 
               </div>
@@ -136,6 +176,7 @@ function BookingSummary() {
                     size={3}
                     placeholder="CVV"
                     required
+                    onChange={(e) => { handleCreditPass(e) }}
                   />
                 </div>
 
@@ -144,9 +185,25 @@ function BookingSummary() {
 
 
           </div>
+          <Link to={redirectPage}
+            state={{
+              // seatNumber: JSON.stringify(seatNumber),
+              title: title,
+              Hall_Name: Hall_Name,
+              Total_ticket: Total_ticket,
+              total_ticket_price: total_ticket_price,
+              seat_type: seat_type,
+              poster: poster,
 
-          <Button className="paymentBarBtn"
-            style={{ marginBottom: "20px" }}>Make Payment</Button>
+              Holder_name: cardHolder,
+              Transaction_Id: creditCardNum,
+            }}
+
+            onClick={() => { validation() }}
+>
+            <Button className="paymentBarBtn"
+              style={{ marginBottom: "20px" }}>Make Payment</Button>
+          </Link>
         </div>
 
 

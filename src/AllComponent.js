@@ -11,6 +11,7 @@ import MoviesSlider from './PosterSlider/MoviesSlider';
 // import Ticket from './BookingTicket/Ticket';
 
 
+
 function AllComponent() {
 
     return (<div>

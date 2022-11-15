@@ -29,9 +29,9 @@
 
 
 .receipt {
-    width: 50%;
+    width: 35%;
     padding: 10px;
-    margin-left: 10px;
+    margin: 0px 10%;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -116,7 +116,10 @@
 }
 
 
-
+.paymentBarBtn{
+ width: 140px;
+height: 10px;
+}
 
 
 

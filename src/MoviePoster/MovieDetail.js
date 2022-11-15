@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-// import './MovieDetail.css'
+import React, { useEffect, useState } from 'react';
+import './MovieDetail.css'
+
+import Navbar from '../MainNavbar/Navbar';
+import StarIcon from '@mui/icons-material/Star';
 
 import {
     Input,
@@ -17,6 +20,7 @@ import {
 
 
 import { Link, useLocation } from 'react-router-dom'
+import { AccountTreeSharp } from '@material-ui/icons';
 
 const { Header, Content, Footer } = Layout;
 const { Search } = Input
@@ -26,141 +30,136 @@ function MovieDetail(props) {
     let logo = "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-ODJrIGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331997-myeqyuplfu-portrait.jpg";
 
     const location = useLocation()
-    const { title, likes, poster, language, format } = location.state;
+    const {movieId, title, likes, poster, language, format, releaseDate, rating, length, ageRating, description } = location.state;
 
+    //   console.log(releaseDate);
 
-
-    const movie = {
-        title: "Uunchai",
-        description: "Three friends take a trek to the Everest Base Camp which becomes a personal, emotional and spiritual journey while battling their physical limitations and discovering the true meaning of freedom.",
-        cast: [
-            {
-                firstName: "Amitabh",
-                lastName: "Bachchan",
-                image: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/amitabh-bachchan-138-12-09-2017-02-34-37.jpg"
-            },
-            {
-                firstName: "Rekha",
-                lastName: "Bachchan",
-                image: "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/rekha-1864-22-09-2017-03-36-15.jpg"
-            }
-
-        ],
-        releaseDate: "11 Nov 2022",
-        length: 129,
-        language: "Hindi",
-        ageRating: "U",
-        format: "2D/3D",
-        poster: "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/uunchai-et00335262-1665386678.jpg",
-        genre: [
-            "Adventure", "Drama", "Family"
-        ]
+    let hrs = Math.floor(length / 60);
+    let min = length % 60;
+    if (hrs <= 9) {
+        hrs = "0" + hrs;
     }
+    if (min <= 9) {
+        min = "0" + min;
+    }
+
+      const [DisplayActorArray, setDisplayActorArray] = useState([]);
+
+function ShowActorArray() {
+    fetch(`/actors/${movieId}`)
+      .then((response) => response.json())
+      .then((json) => {
+        let newMovieArray = json;
+        console.log("This is my Movie " + json);
+        setDisplayActorArray(newMovieArray);
+      });
+  }
+
+  useEffect(() => {
+    ShowActorArray();
+  }, []);      
+
+
     return (<>
-        <div>Movies Titile is- {title}</div>
-        <div>Total likes for this Movies  is- {likes}k</div>
-        <div>Movies poster url is- {poster}</div>
-        <div>Movies language is- {language}</div>
-        <div>Movies formate- {format}</div>
+        <Navbar></Navbar>
 
+        <div className='MoviesDetails'>
 
-        <Layout className="layout">
-            <Header >
-                <div style={{ marginLeft: 200, display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <div style={{ marginBottom: 15 }}>
-
-                        <a href="/">
-                            <Image
-                                width={200}
-                                height={50}
-                                src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-ODJrIGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331997-myeqyuplfu-portrait.jpg"
-                            />
-                        </a>
-                    </div>
-                    <div style={{ marginLeft: 30, marginTop: 15 }}>
-                        <Search placeholder="input search text" enterButton />
-                    </div>
-                </div>
-            </Header>
-            <Content>
-                <Breadcrumb
-                    style={{
-                        margin: '5px 10px',
-                    }}
-                >
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <div style={{ backgroundColor: 'silver' }}>
-                    <div style={{ marginLeft: 450, display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
-                        <Image
-                            width={250}
-                            height={350}
-                            style={{
-                                boxShadow: 'inset 0 0 100px black'
-                            }}
-                            src={movie.poster}
-                        />
-                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'left', marginLeft: 50 }}>
-                            <h1 style={{ fontWeight: 'bold', fontSize: 30 }}>
-                                {title}
-
-                            </h1>
-                            <Tag color="volcano">{movie.format}</Tag>
-                            <Tag color="volcano">{movie.language}</Tag>
-                            <Tag color="volcano">{movie.length.toString()}</Tag>
-                            <Tag color="volcano">{movie.ageRating}</Tag>
-                            <Tag color="volcano">{movie.releaseDate}</Tag>
-                            <Divider />
-                            <Link to='/movie-details/Hall-name_and_date-time'
-                                state={{
-                                    title: title,
-                                    language: language,
-                                    format: format
-                                    // likes: props.MovieDetails.likes,
-                                    // poster: props.MovieDetails.poster,
-                                }}>
-                                <Button type="primary">Book Show</Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="site-layout-content">
-                    <div style={{ marginLeft: 300, marginRight: 300 }}>
-                        <h1 style={{ fontWeight: 'bold' }}>About the movie</h1>
-                        <p>{movie.description}</p>
-                        <Divider />
-                        <h1 style={{ fontWeight: 'bold' }}>Cast</h1>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                            {
-                                movie.cast.map((actor) => (
-                                    <div style={{ margin: 10 }}>
-                                        <Avatar size={100} src={actor.image} />
-                                        <h1>{actor.firstName + " " + actor.lastName}</h1>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <Divider dashed />
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-                            probare, quae sunt a te dicta? Refert tamen, quo modo.
-                        </p>
-                    </div>
-                </div>
-            </Content>
-            <Footer
+            <div className='MoviesPosterDetails'
                 style={{
-                    textAlign: 'center',
-                }}
-            >
-                Ant Design ©2018 Created by Ant UED
-            </Footer>
-        </Layout>
+                    backgroundImage: "linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%,		rgba(26, 26, 26, 0.0409746) 97.47%, #1A1A1A 100%)"
+                    //  , backgroundImage:`url(${poster})`
+                }}>
+
+                <div className='MoviesPosterDetailsImageLeft'>
+                    <img className="d-block_w-100"
+                        src={poster}
+                        alt="" />
+                    <div className='carousel-item-like-icon-count'
+                        style={{ display: "flex", justifyContent: "center" }}>
+                        <span className='carousel-item-likes-count'>
+                            Releasing on {releaseDate}
+                        </span>
+                    </div>
+                </div>
+
+
+                <div className='MoviesPosterDetailsImageRight'>
+                    <h3 className='MoviesPosterDetailsImageRightTitle'>{title}</h3>
+                    <span className='MoviesPosterDetailsImageRightRating'>
+                        <StarIcon className='star' />{rating}/10</span>
+
+                    <span className='MoviesPosterDetailsImageRightFormateLanguage'>
+                        <span style={{ margin: "5px", background: "white", padding: "5px" }}>{format}</span>
+                        <span style={{ margin: "5px", background: "white", padding: "5px" }}>{language}</span></span>
+
+                    <span className='MoviesPosterDetailsImageRightLengthageRatingReleasedate'>
+                        <span className='sameDetailCompo'>{hrs}h &nbsp; {min}m</span>
+                        <span className='sameDetailCompo'>{ageRating}</span>
+                        <span className='sameDetailCompo'>{releaseDate}</span>
+                    </span>
+
+                    <Link to="/movie-details/Hall-name_and_date-time"
+                        state={{
+                            poster: poster,
+                            movieId: movieId,
+                            title: title,
+                            language: language,
+                            format: format,
+                        }}  >
+                        <Button
+                            className="paymentBarBtn"
+                            type="primary" style={{ backgroundColor: "#f84464", height: "10px", width: "140px", marginTop: "42px" }}
+                        >
+                            <span style={{ color: "white" }}>
+                                Book tickets
+                            </span>
+                        </Button>
+                    </Link>
+
+                </div>
+
+            </div>
+
+
+            <div className='MoviesAboutDetails'>
+                <h4 className='MoviesAboutDetailsAbout'>About the movie</h4>
+                <p className='MoviesAboutDetailsDesc'>{description}</p>
+            </div>
+
+
+            <h4 className='MoviesAboutDetailsAbout MoviesAboutDetails'>Cast</h4>
+            <div className='MoviesCastsDetails'>
+
+                {DisplayActorArray.map((actor, index)=>{
+
+                let actorarr=actor.split(",");
+                //  console.log((actorarr));
+            
+           return(<div className="Actor_picAndName">
+                    <img className="Actor_pic"
+                        src={actorarr[3]}
+                        alt="" />
+                    <span className="Actor_name">{actorarr[1]} {actorarr[2]}</span>
+                </div>);
+})}
+
+                {/* <div className="Actor_picAndName">
+                    <img className="Actor_pic"
+                        src={poster}
+                        alt="" />
+                    <span className="Actor_name">{title}</span>
+                </div> */}
+
+            </div>
+
+
+        </div>
+
     </>)
 };
+
+
 export default MovieDetail;
 
 

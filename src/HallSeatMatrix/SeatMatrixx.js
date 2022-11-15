@@ -13,17 +13,14 @@ import { Link, useLocation } from 'react-router-dom';
 
 const SeatMatrix = () => {
     const location = useLocation();
-    const { title, Hall_Name, Selected_date, Selected_time, total_seat } = location.state;
+    const { title, Hall_Name, Selected_date, Selected_time, total_seat, alltiming, poster } = location.state;
+  
+      const AllTiming=JSON.parse(alltiming);
+            // console.log(AllTiming);
 
 
-    let Timing = [
-        { movieTime: "12:15 PM" },
-        { movieTime: "03:30 PM" },
-        { movieTime: "06:45 PM" },
-        { movieTime: "10:15 PM" },
-    ];
-
-    const [buttonTimeId, setButtonTimeId] = useState(0);
+     const [selected_Seat_Num, setSelected_Seat_Num ] = useState([]); 
+    const [buttonTimeId, setButtonTimeId] = useState(Selected_time);
     const R = 11;
     const C = 23;
 
@@ -34,18 +31,26 @@ const SeatMatrix = () => {
         seatCount: total_seat,
         seatPrice: 100,
     })
+ 
 
     const onSelect = (e, index, cindex) => {
         if (selectedCount >= ticket.seatCount) {
             alert(`You already selected ${selectedCount} seat.`)
             return;
         }
-        const s = {
+        
+        let recentlySeletSeat = {
             row: index,
             col: cindex
         }
+        
+        let newsetSelected_Seat_Num = selected_Seat_Num;
+        newsetSelected_Seat_Num.push(recentlySeletSeat);
+        setSelected_Seat_Num(newsetSelected_Seat_Num);
+         console.log(selected_Seat_Num);
 
-        const data = [...ticket.seats, s];
+
+        const data = [...ticket.seats, recentlySeletSeat];
 
         setTicket({ ...ticket, seats: data })
 
@@ -66,6 +71,26 @@ const SeatMatrix = () => {
         const tick = [...ticket.seats]
         const ans = tick.filter((se) => (se.row !== index || se.col !== cindex))
         setTicket({ ...ticket, seats: ans })
+
+
+         
+        var removeByAttr = function(arr, Row, Col){
+                var i = arr.length;
+                while(i--){
+                    if(arr[i].row===Row && arr[i].col===Col){
+                      break;
+                       }
+                 }
+
+           arr.splice(i,1);
+        
+         return arr;
+    }
+
+       let newsetSelected_Seat_Num = selected_Seat_Num;
+       newsetSelected_Seat_Num=removeByAttr(newsetSelected_Seat_Num, index, cindex);
+        setSelected_Seat_Num(newsetSelected_Seat_Num);
+        console.log(selected_Seat_Num);
     }
 
     const isOccupied = (index, cindex) => {
@@ -96,7 +121,7 @@ const SeatMatrix = () => {
                 <div key={Rindex} className="row">
                     {
                         [...Array(C)].map((C, Cindex) => (
-                            Cindex <= 4 && Rindex <= 7 ?
+                            Cindex <= 3 && Rindex <= 7 ?
                                 isOccupied(Rindex, Cindex)
                                     ? <div className="occupied">{Cindex}</div>
                                     : isSelected(Rindex, Cindex)
@@ -117,7 +142,7 @@ const SeatMatrix = () => {
                 <div key={Rindex} className="row">
                     {
                         [...Array(C)].map((C, Cindex) => (
-                            Cindex >= 5 && Cindex <= 18 ?
+                            Cindex >= 4 && Cindex <= 17 ?
                                 isOccupied(Rindex, Cindex)
                                     ? <div className="occupied">{Cindex}</div>
                                     : isSelected(Rindex, Cindex)
@@ -138,7 +163,7 @@ const SeatMatrix = () => {
                 <div key={Rindex} className="row">
                     {
                         [...Array(C)].map((C, Cindex) => (
-                            Cindex >= 19 && Cindex <= 20 ?
+                            Cindex >= 18 && Cindex <= 19 ?
                                 isOccupied(Rindex, Cindex)
                                     ? <div className="occupied">{Cindex}</div>
                                     : isSelected(Rindex, Cindex)
@@ -214,15 +239,15 @@ const SeatMatrix = () => {
 
 
             <div className="MovieTimingInOneTheater">
-                {Timing.map((time, index) => {
+                {AllTiming.map((time, index) => {
                     return (
                         <Button className="MovieTimingInOneTheaterBtn"
-                            style={buttonTimeId === index ? { background: "#2dc492", color: "white" }
+                            style={buttonTimeId === time.showtimeingmovies ? { background: "#2dc492", color: "white" }
                                 : { background: "white", color: "#2dc492" }}
-                            onClick={() => {
-                                setButtonTimeId(index);
-                            }}
-                        >{time.movieTime}</Button>
+                            // onClick={() => {
+                            //     setButtonTimeId(time.showtimeingmovies);
+                            // }}
+                        >{time.showtimeingmovies}</Button>
                     )
                 })}
 
@@ -239,16 +264,18 @@ const SeatMatrix = () => {
                 <span className="paymentBar">
                     <Link to="/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details"
                         state={{
+                            selected_Seat_Num: JSON.stringify(selected_Seat_Num),
+                             poster: poster,
                             title: title,
                             Hall_Name: Hall_Name,
                             Total_ticket: selectedCount,
                             total_ticket_price: selectedCount * ticket.seatPrice,
                             seat_type: "Gold",
-
+                            
                         }}>
                         <Button className="paymentBarBtn"
                             type="primary" style={{ backgroundColor: "#f84464" }}
-                        // onClick={ShowBookingSummaryPage}
+                        // onClick={() =>{alert("jai shree ram"); ShowBookingSummaryPage()}}
                         >
                             <span style={{ color: "white" }}>
                                 Total : {selectedCount * ticket.seatPrice}

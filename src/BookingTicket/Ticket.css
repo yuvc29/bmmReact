@@ -3,6 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+/* border: 1px solid black; */
+width: 35%;
+padding: 20px;
+
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .booklogo {
@@ -11,15 +18,17 @@
 }
 
 .ticketContainer {
-    width: 25vw;
-    padding-left: 1%;
-    padding-right: 1%;
-    padding-bottom: 2%;
-    background-color: #010101;
+    /* border: 1px solid blue; */
+display: flex;
+justify-content: center;
 }
 
 .insidetkt {
     background-color: #fff;
+}
+
+.ticketHeadAll{
+display: flex;
 }
 
 .ticketHead {
@@ -33,8 +42,8 @@
 }
 
 .moviePoster {
-    height: 200px;
-    width: 180px;
+    height: 300px;
+    width: 280px;
     border-radius: 10px;
 }
 
@@ -46,7 +55,7 @@
 }
 
 .qrCode {
-    margin-left: 100px;
+    /* margin-left: 100px; */
     height: 220px;
     width: 220px;
 }

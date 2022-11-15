@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesSlider.css';
 
-
-import MovieArray from '../AllArray/MovieArray';
-
 import MovieCard from './MovieCard';
+
+// import MovieArray from '../AllArray/MovieArray';
+// import MovieDetailsEntryArray from '../AllArray/MovieDetailsEntryArray';
 
 
 
 
 function MoviesSlider() {
 
+   
+const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
 
+function ShowMovieArray() {
+    fetch("/movie")
+      .then((response) => response.json())
+      .then((json) => {
+        let newMovieArray = json;
+        console.log("This is my Movie " + json);
+        setDisplayMovieArray(newMovieArray);
+      });
+  }
 
-    const result = MovieArray.reduce((resultArray, item, index) => {
+  useEffect(() => {
+    ShowMovieArray();
+  }, []);
+
+const result = DisplayMovieArray.reduce((resultArray, item, index) => {
         //divide MovieArray in subarray with 5 elements
         const chunkIndex = Math.floor(index / 5)
 
@@ -29,6 +44,22 @@ function MoviesSlider() {
 
 
 
+
+    // const result = MovieArray.reduce((resultArray, item, index) => {
+    //     //divide MovieArray in subarray with 5 elements
+    //     const chunkIndex = Math.floor(index / 5)
+
+    //     if (!resultArray[chunkIndex]) {
+    //         resultArray[chunkIndex] = [] // start a new chunk
+    //     }
+
+    //     resultArray[chunkIndex].push(item)
+
+    //     //resultArray (same as MovieArray)is array of subarray with length 5
+    //     return resultArray;
+    // }, [])
+
+   
 
     return (
         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
@@ -61,6 +92,7 @@ function MoviesSlider() {
                                 {/* for print one subarray */}
                                 <div className='carousel-item1-Row'>
                                     {result[index].map((chunkmovies, chunkindex) => {
+                                            // console.log(chunkmovies.length);
                                         return (<>
                                             <MovieCard Movie={chunkmovies} ></MovieCard>
                                         </>)

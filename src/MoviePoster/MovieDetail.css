@@ -1,21 +1,113 @@
-@import '~antd/dist/antd.css';
-.site-layout-content {
-    min-height: 280px;
-    padding: 24px;
-    background: #fff;
-  }
-  #components-layout-demo-top .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  .ant-row-rtl #components-layout-demo-top .logo {
-    float: right;
-    margin: 16px 0 16px 24px;
-  }
+.MoviesDetails {
+   position: relative;
+   top: 115px;
+
+}
+
+.MoviesPosterDetails {
+   display: flex;
+   padding: 35px 35px;
+
+   /* background-color: rgb(26, 26, 26); */
+
+   
+}
+
+.MoviesPosterDetailsImageLeft {
+   margin: 0px 10px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+   /* width: 70%;     */
+
+   position: relative;
+   left: 200px;
+}
+
+.MoviesPosterDetailsImageRight {
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+   width: 70%;
+
+   position: relative;
+   left: 200px;
+}
+
+.MoviesPosterDetailsImageRightTitle {
+   font-weight: bold;
+   color: white;
+   margin: 5px 0px 35px 0px;
+}
+
+.MoviesPosterDetailsImageRightRating {
+   display: flex;
+   align-items: center;
+   font-size: 24px;
+   font-weight: bold;
+   color: white;
+}
+
+.star {
+   margin: 0px 15px 0px 0px;
+   transform: scale(1.3);
+}
+
+.MoviesPosterDetailsImageRightFormateLanguage {
+   padding: 10px 0px;
+}
+
+.MoviesPosterDetailsImageRightLengthageRatingReleasedate {
+   padding: 10px 0px;
+   color: white;
+
+}
+
+.sameDetailCompo {
+   margin: 0px 5px;
+}
+
+.MoviesAboutDetails {
+   margin: 20px;
+
+   width: 70%;
+   position: relative;
+   left: 200px;
+}
+
+.MoviesAboutDetailsAbout {
+   font-weight: bold;
+}
+
+/* .MoviesAboutDetailsDesc{
+   width: 70%;
+} */
+
+.MoviesCastsDetails {
+   display: flex;
+   padding: 20px;
+ overflow-x: scroll;
+   width: 70%;
+   position: relative;
+   left: 200px;
+}
 
 
+.MoviesCastsDetails::-webkit-scrollbar {
+    display: none;
+}
 
 
+.Actor_picAndName {
+    margin: 0px 20px;
+}
+
+.Actor_pic {
+   height: 120px;
+   width: 120px;
+   border-radius: 70px;
+}
+
+.Actor_name {
+   padding: 5px;
+   font-weight: bold;
+}
