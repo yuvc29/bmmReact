@@ -7,13 +7,11 @@ import MovieCard from './MovieCard';
 // import MovieDetailsEntryArray from '../AllArray/MovieDetailsEntryArray';
 
 
-
-
 function MoviesSlider() {
 
-   
-const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
 
+
+const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
 function ShowMovieArray() {
     fetch("/movie")
       .then((response) => response.json())

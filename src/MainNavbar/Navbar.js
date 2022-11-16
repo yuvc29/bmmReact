@@ -34,7 +34,9 @@ function Navbar() {
         <div className="navbar">
             <div className="navbarTop">
                 <div className="navbarTopLeft">
-                    <a href="_blank" className="logo">BookmyMovie</a>
+<Link to="/">
+                    <a href="" className="logo">BookmyMovie</a>
+</Link>
                     <Link to="/movie-details-By- search movie-name">
                     <input type="text" className="searchMovies"
                         placeholder='search for movies, plays, events, sports ....'

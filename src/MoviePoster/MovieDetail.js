@@ -3,6 +3,7 @@ import './MovieDetail.css'
 
 import Navbar from '../MainNavbar/Navbar';
 import StarIcon from '@mui/icons-material/Star';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 import {
     Input,
@@ -30,7 +31,7 @@ function MovieDetail(props) {
     let logo = "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-ODJrIGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331997-myeqyuplfu-portrait.jpg";
 
     const location = useLocation()
-    const {movieId, title, likes, poster, language, format, releaseDate, rating, length, ageRating, description } = location.state;
+    const { movieId, title, likes, poster, language, format, releaseDate, rating, length, ageRating, description, trailer } = location.state;
 
     //   console.log(releaseDate);
 
@@ -43,21 +44,21 @@ function MovieDetail(props) {
         min = "0" + min;
     }
 
-      const [DisplayActorArray, setDisplayActorArray] = useState([]);
+    const [DisplayActorArray, setDisplayActorArray] = useState([]);
 
-function ShowActorArray() {
-    fetch(`/actors/${movieId}`)
-      .then((response) => response.json())
-      .then((json) => {
-        let newMovieArray = json;
-        console.log("This is my Movie " + json);
-        setDisplayActorArray(newMovieArray);
-      });
-  }
+    function ShowActorArray() {
+        fetch(`/actors/${movieId}`)
+            .then((response) => response.json())
+            .then((json) => {
+                let newMovieArray = json;
+                console.log("This is my Movie " + json);
+                setDisplayActorArray(newMovieArray);
+            });
+    }
 
-  useEffect(() => {
-    ShowActorArray();
-  }, []);      
+    useEffect(() => {
+        ShowActorArray();
+    }, []);
 
 
     return (<>
@@ -67,20 +68,34 @@ function ShowActorArray() {
 
             <div className='MoviesPosterDetails'
                 style={{
-                    backgroundImage: "linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%,		rgba(26, 26, 26, 0.0409746) 97.47%, #1A1A1A 100%)"
+                    backgroundImage: "linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26 26 26 / 7%) 100%)"
                     //  , backgroundImage:`url(${poster})`
                 }}>
 
                 <div className='MoviesPosterDetailsImageLeft'>
-                    <img className="d-block_w-100"
-                        src={poster}
-                        alt="" />
-                    <div className='carousel-item-like-icon-count'
-                        style={{ display: "flex", justifyContent: "center" }}>
-                        <span className='carousel-item-likes-count'>
-                            Releasing on {releaseDate}
-                        </span>
+
+                    <div>
+                        <img className="d-block_w-100"
+                            src={poster}
+                            alt="Poster not found" />
+
+                        <div className='carousel-item-like-icon-count'
+                            style={{ display: "flex", justifyContent: "center" }}>
+                            <span className='carousel-item-likes-count'>
+                                Releasing on {releaseDate}
+                            </span>
+                        </div>
                     </div>
+
+                     <div className='GoToTrailersTitleIcon'>
+                    <a className='GoToTrailers' 
+                      href={trailer}  target="_blank" rel="noreferrer"
+                     >Trailers (1)</a>
+
+                     <PlayCircleOutlineIcon 
+                      className='GoToTrailers GoToTrailersIcon'/>
+                     </div>
+
                 </div>
 
 
@@ -131,18 +146,18 @@ function ShowActorArray() {
             <h4 className='MoviesAboutDetailsAbout MoviesAboutDetails'>Cast</h4>
             <div className='MoviesCastsDetails'>
 
-                {DisplayActorArray.map((actor, index)=>{
+                {DisplayActorArray.map((actor, index) => {
 
-                let actorarr=actor.split(",");
-                //  console.log((actorarr));
-            
-           return(<div className="Actor_picAndName">
-                    <img className="Actor_pic"
-                        src={actorarr[3]}
-                        alt="" />
-                    <span className="Actor_name">{actorarr[1]} {actorarr[2]}</span>
-                </div>);
-})}
+                    let actorarr = actor.split(",");
+                    //  console.log((actorarr));
+
+                    return (<div className="Actor_picAndName">
+                        <img className="Actor_pic"
+                            src={actorarr[3]}
+                            alt="" />
+                        <span className="Actor_name">{actorarr[1]} {actorarr[2]}</span>
+                    </div>);
+                })}
 
                 {/* <div className="Actor_picAndName">
                     <img className="Actor_pic"

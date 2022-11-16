@@ -12,18 +12,41 @@ import BookingSummary from "../BookingTicket/BookingSummary";
 import { Link, useLocation } from 'react-router-dom';
 
 const SeatMatrix = () => {
-    const location = useLocation();
-    const { title, Hall_Name, Selected_date, Selected_time, total_seat, alltiming, poster } = location.state;
+
+const location = useLocation();
+const { title, Hall_Name, Selected_date, Selected_time, total_seat, alltiming, poster, showId } = location.state;
   
-      const AllTiming=JSON.parse(alltiming);
-            // console.log(AllTiming);
+const AllTiming=JSON.parse(alltiming);
+// console.log("This is array" + AllTiming[0].timing);
 
 
-     const [selected_Seat_Num, setSelected_Seat_Num ] = useState([]); 
+const [DisplayBookedSeatArray, setDisplayBookedseateArray] = useState([]);
+
+const GetSeatsbyShowId = async(showId) => {
+	
+   fetch(`/seat/show/${showId}`)
+      .then((response) => response.json())
+      .then((json) => {
+        let newBookedSeatArray = json;
+        console.log("This is my Movie " + json);
+        setDisplayBookedseateArray(newBookedSeatArray);
+      });
+}
+
+  useEffect(() => {
+    GetSeatsbyShowId(showId);
+  }, []);
+
+
+
+    const [selected_Seat_Num, setSelected_Seat_Num ] = useState([]); 
     const [buttonTimeId, setButtonTimeId] = useState(Selected_time);
+    
     const R = 11;
     const C = 23;
 
+//  const [authenticated, setAuthenticated] = useState(true);
+    const [isModalVisible, setModalVisible] = useState(true);
     const [enabledPaymentRedirect, setEnabledPaymentRedirect] = useState(false);
     const [selectedCount, setSelectedCount] = useState(0);
     const [ticket, setTicket] = useState({
@@ -44,12 +67,7 @@ const SeatMatrix = () => {
             col: cindex
         }
         
-        let newsetSelected_Seat_Num = selected_Seat_Num;
-        newsetSelected_Seat_Num.push(recentlySeletSeat);
-        setSelected_Seat_Num(newsetSelected_Seat_Num);
-         console.log(selected_Seat_Num);
-
-
+        
         const data = [...ticket.seats, recentlySeletSeat];
 
         setTicket({ ...ticket, seats: data })
@@ -73,31 +91,17 @@ const SeatMatrix = () => {
         setTicket({ ...ticket, seats: ans })
 
 
-         
-        var removeByAttr = function(arr, Row, Col){
-                var i = arr.length;
-                while(i--){
-                    if(arr[i].row===Row && arr[i].col===Col){
-                      break;
-                       }
-                 }
-
-           arr.splice(i,1);
-        
-         return arr;
-    }
-
-       let newsetSelected_Seat_Num = selected_Seat_Num;
-       newsetSelected_Seat_Num=removeByAttr(newsetSelected_Seat_Num, index, cindex);
-        setSelected_Seat_Num(newsetSelected_Seat_Num);
-        console.log(selected_Seat_Num);
     }
 
     const isOccupied = (index, cindex) => {
-        // const ans = booked.find((book) => book.row == index && book.col == cindex)
-        // if(ans)
-        //     return true;
-        return false;
+        const temp = parseInt(index.toString() + cindex.toString());
+        // console.log("booked ",DisplayBookedSeatArray,"temp", temp);
+
+        let ans= false;
+        DisplayBookedSeatArray.map((book) => ans|=(book.seatNo === temp && book.orderId!==null));
+        // console.log("ans",ans);
+
+        return ans;
     }
 
     const isSelected = (index, cindex) => {
@@ -203,24 +207,6 @@ const SeatMatrix = () => {
     </div>
 
 
-
-    const [bookingSummaryPage, setBookingSummaryPage] = useState("");
-    const HideBookingSummaryPage = () => {
-        setBookingSummaryPage("")
-    }
-    const ShowBookingSummaryPage = () => {
-        setBookingSummaryPage(<div>
-            <Button className="MovieTimingInOneTheaterBtn 
-                            BackToSeatMatrix"
-                onClick={HideBookingSummaryPage}
-            >Back</Button>
-            <BookingSummary />
-        </div>
-        )
-    }
-
-
-
     return (
         <div className="seatmatrixbody">
             <div className="movie_desc_bar">
@@ -242,23 +228,18 @@ const SeatMatrix = () => {
                 {AllTiming.map((time, index) => {
                     return (
                         <Button className="MovieTimingInOneTheaterBtn"
-                            style={buttonTimeId === time.showtimeingmovies ? { background: "#2dc492", color: "white" }
+                            style={buttonTimeId === time.timing ? { background: "#2dc492", color: "white" }
                                 : { background: "white", color: "#2dc492" }}
-                            // onClick={() => {
-                            //     setButtonTimeId(time.showtimeingmovies);
-                            // }}
-                        >{time.showtimeingmovies}</Button>
+                            onClick={() => {
+                                setButtonTimeId(time.timing);
+                            }}
+                        >{time.timing}</Button>
                     )
                 })}
 
             </div>
 
             {seatMatrixOfMall}
-
-            <div>
-                {bookingSummaryPage}
-            </div>
-
 
             {enabledPaymentRedirect ? (
                 <span className="paymentBar">
@@ -290,3 +271,36 @@ const SeatMatrix = () => {
 }
 
 export default SeatMatrix;
+
+
+
+
+
+
+
+//For dummy seat adding.. wrire in onselect function in last;
+
+// let newsetSelected_Seat_Num = selected_Seat_Num;
+        // newsetSelected_Seat_Num.push(recentlySeletSeat);
+        // setSelected_Seat_Num(newsetSelected_Seat_Num);
+        //  console.log(selected_Seat_Num);
+
+
+//for remove the dummy added seat that contain row and column;....write it in unselect function;
+// var removeByAttr = function(arr, Row, Col){
+        //         var i = arr.length;
+        //         while(i--){
+        //             if(arr[i].row===Row && arr[i].col===Col){
+        //               break;
+        //                }
+        //          }
+
+        //         arr.splice(i,1);
+        
+        //      return arr;
+        //   }
+
+        // let newsetSelected_Seat_Num = selected_Seat_Num;
+        // newsetSelected_Seat_Num=removeByAttr(newsetSelected_Seat_Num, index, cindex);
+        // setSelected_Seat_Num(newsetSelected_Seat_Num);
+        // console.log(selected_Seat_Num);

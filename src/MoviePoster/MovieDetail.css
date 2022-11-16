@@ -9,18 +9,48 @@
    padding: 35px 35px;
 
    /* background-color: rgb(26, 26, 26); */
-
-   
 }
+
+.GoToTrailersTitleIcon {
+   position: relative;
+   bottom: 57%;
+   left: 23%;
+
+   background-color: rgba(34, 34, 34, 0.8);
+   border-radius: 8px;
+   padding: 4px 6px;
+
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
+   align-items: center;
+
+   width: 55%;
+}
+
+.GoToTrailers {
+   color: white;
+font-size: 13px;
+ font-weight: bold;
+ margin-left: 4px;
+}
+
+.GoToTrailersTitleIcon{
+  color: white;
+   transform: scale(0.7);
+}
+
 
 .MoviesPosterDetailsImageLeft {
    margin: 0px 10px;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
    /* width: 70%;     */
-
+   height: 327px;
+border-radius: 10px;
    position: relative;
    left: 200px;
+
 }
 
 .MoviesPosterDetailsImageRight {
@@ -85,7 +115,7 @@
 .MoviesCastsDetails {
    display: flex;
    padding: 20px;
- overflow-x: scroll;
+   overflow-x: scroll;
    width: 70%;
    position: relative;
    left: 200px;
@@ -93,12 +123,12 @@
 
 
 .MoviesCastsDetails::-webkit-scrollbar {
-    display: none;
+   display: none;
 }
 
 
 .Actor_picAndName {
-    margin: 0px 20px;
+   margin: 0px 20px;
 }
 
 .Actor_pic {
