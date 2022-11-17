@@ -343,7 +343,7 @@ const PostMyOrder = async(orderObj) => {
                             Total_ticket: selectedCount, //ticket_seat_count
                             total_ticket_price: selectedCount * ticket.seatPrice,//ticket_price
                             ticket:  JSON.stringify(ticket),//(booked_seatArray, seatCount, ticket_Price)
-
+                           
       //seatList : seatList  Not working properly so i used ticket.seats in BookingSummary compo to get all seats;
                             // seatList : JSON.stringify(seatList),//All_seat_Location_info
                              seat_type: "Gold", //Seat_Type

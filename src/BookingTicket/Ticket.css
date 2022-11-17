@@ -1,8 +1,8 @@
-.ticketPage {
+/* .ticketPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid black; */
+    /* border: 1px solid black; 
     width: 35%;
     padding: 20px;
 
@@ -15,14 +15,14 @@
     border-right: 10px solid #1f2533;
 
 }
-
+ 
 .booklogo {
     height: 60px;
     width: 200px;
 }
 
 .ticketContainer {
-    /* border: 1px solid blue; */
+    /* border: 1px solid blue; 
     display: flex;
     justify-content: center;
 }
@@ -59,11 +59,102 @@
 }
 
 .qrCode {
-    /* margin-left: 100px; */
+    /* margin-left: 100px; 
     height: 220px;
     width: 220px;
 }
 
 .finalLinks {
     margin-top: 10px;
+} */
+
+
+
+
+
+
+.ticketPageCont{
+    position: fixed;
+    top:0px;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+
+   height: 100%;
+   width: 100%;
 }
+
+
+
+.ticketPage{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.booklogo{
+    height: 60px;
+    width:200px;
+
+
+}
+
+.ticketContainer{
+    width: 25vw;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 5%;
+    background-color: #010101;
+}
+
+.insidetkt{
+    background-color: #fff;
+}
+
+.ticketHead{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.movieInfo{
+    margin-left: 30px;
+}
+
+.moviePoster{
+    height: 200px;
+    width: 180px;
+    border-radius: 10px;
+}
+
+.ticketMid{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+.ticketMidGrid{
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 30px;
+}
+
+.qrCode{
+    margin-left: 100px;
+    height: 220px;
+    width: 220px;
+}
+
+.finalLinks{
+    margin-top: 10px;
+}
+
+
+
+
+
+
+

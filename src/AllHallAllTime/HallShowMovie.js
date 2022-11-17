@@ -22,7 +22,7 @@ function HallShowMovies() {
     const dateArray = [{date_formate: '22/11/2022'}, {date_formate: '23/11/2022'}];
     const [date_formate, setDate_formate] = useState(dateArray[0].date_formate);
 
-    const [selected_seat, setselected_seat] = useState(0);
+    const [selected_seat, setselected_seat] = useState(4);
 
     const [theatreList, setTheatreList] = useState([]);
     const [city_Id, setCity_Id] = useState(1);

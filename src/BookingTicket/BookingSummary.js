@@ -11,7 +11,7 @@ import axios from 'axios';
 function BookingSummary() {
 
   const location = useLocation();
-  const { seatList, title, Hall_Name, Hall_Address, Total_ticket, total_ticket_price, seat_type, poster, Selected_date, Selected_time, showId, selected_Seat_Num, ticket, orderObj, orderId } = location.state;
+  const {seatList, title, Hall_Name, Hall_Address, Total_ticket, total_ticket_price, seat_type, poster, Selected_date, Selected_time, showId, selected_Seat_Num, ticket, orderObj, orderId } = location.state;
 
 
   let selected_Seat_Numf = JSON.parse(selected_Seat_Num);
@@ -282,7 +282,7 @@ function BookingSummary() {
           <Link to='/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/ticket-details'
             state={{
 
-              title: "kjahs",
+              title: title,
               poster: poster,
 
               Hall_Name: Hall_Name,
@@ -292,6 +292,7 @@ function BookingSummary() {
               total_ticket_price: total_ticket_price,
               seat_type: seat_type,
               seatListf: JSON.stringify(seatListf),
+               ticketf: JSON.stringify(ticketf),
 
               Selected_date: Selected_date,
               Selected_time: Selected_time,
