@@ -4,44 +4,7 @@
     height: 100%;
 }
 
-
-
-
-
-
-
-
-/* CSS for structure  of Buttom Navbar and Pay Button Seat Matrix page content for select the seat, start here*/
-
-
-
-
-/* CSS for structure  of Buttom Navbar and Pay Button Seat Matrix page content for select the seat, end here*/
-
-
-
-/* CSS for structure  of Seat Matrix page content for select the seat, end here*/
-
-
-
-
-
-/* CSS for structure  of Show All Hall and it's timing for a selected movies, start here*/
-
-
-
-
-
-
-
-
-
-
-/* ********* */
-/* TICKET PAGE CSS */
-/* ********* */
-
-
-
-
-/* CSS for paying the bill after selecting the seats in mall for watching movies, end here*/
+#root{
+position: relative;
+bottom: 10px;
+}

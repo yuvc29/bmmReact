@@ -3,30 +3,27 @@ import './MoviesSlider.css';
 
 import MovieCard from './MovieCard';
 
-// import MovieArray from '../AllArray/MovieArray';
-// import MovieDetailsEntryArray from '../AllArray/MovieDetailsEntryArray';
-
 
 function MoviesSlider() {
 
 
 
-const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
-function ShowMovieArray() {
-    fetch("/movie")
-      .then((response) => response.json())
-      .then((json) => {
-        let newMovieArray = json;
-        console.log("This is my Movie " + json);
-        setDisplayMovieArray(newMovieArray);
-      });
-  }
+    const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
+    function ShowMovieArray() {
+        fetch("/movie")
+            .then((response) => response.json())
+            .then((json) => {
+                let newMovieArray = json;
+                console.log("This is my Movie " + json);
+                setDisplayMovieArray(newMovieArray);
+            });
+    }
 
-  useEffect(() => {
-    ShowMovieArray();
-  }, []);
+    useEffect(() => {
+        ShowMovieArray();
+    }, []);
 
-const result = DisplayMovieArray.reduce((resultArray, item, index) => {
+    const result = DisplayMovieArray.reduce((resultArray, item, index) => {
         //divide MovieArray in subarray with 5 elements
         const chunkIndex = Math.floor(index / 5)
 
@@ -43,21 +40,6 @@ const result = DisplayMovieArray.reduce((resultArray, item, index) => {
 
 
 
-    // const result = MovieArray.reduce((resultArray, item, index) => {
-    //     //divide MovieArray in subarray with 5 elements
-    //     const chunkIndex = Math.floor(index / 5)
-
-    //     if (!resultArray[chunkIndex]) {
-    //         resultArray[chunkIndex] = [] // start a new chunk
-    //     }
-
-    //     resultArray[chunkIndex].push(item)
-
-    //     //resultArray (same as MovieArray)is array of subarray with length 5
-    //     return resultArray;
-    // }, [])
-
-   
 
     return (
         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
@@ -90,7 +72,7 @@ const result = DisplayMovieArray.reduce((resultArray, item, index) => {
                                 {/* for print one subarray */}
                                 <div className='carousel-item1-Row'>
                                     {result[index].map((chunkmovies, chunkindex) => {
-                                            // console.log(chunkmovies.length);
+                                        // console.log(chunkmovies.length);
                                         return (<>
                                             <MovieCard Movie={chunkmovies} ></MovieCard>
                                         </>)
@@ -109,7 +91,7 @@ const result = DisplayMovieArray.reduce((resultArray, item, index) => {
             </div>
             <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-<span className="sr-only">Previous</span> 
+                <span className="sr-only">Previous</span>
             </a>
             <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
@@ -120,3 +102,35 @@ const result = DisplayMovieArray.reduce((resultArray, item, index) => {
 }
 
 export default MoviesSlider;
+
+
+
+
+
+
+
+//for dummy Array;
+
+
+// import MovieArray from '../AllArray/MovieArray';
+// import MovieDetailsEntryArray from '../AllArray/MovieDetailsEntryArray';
+
+
+
+// const result = MovieArray.reduce((resultArray, item, index) => {
+    //     //divide MovieArray in subarray with 5 elements
+    //     const chunkIndex = Math.floor(index / 5)
+
+    //     if (!resultArray[chunkIndex]) {
+    //         resultArray[chunkIndex] = [] // start a new chunk
+    //     }
+
+    //     resultArray[chunkIndex].push(item)
+
+    //     //resultArray (same as MovieArray)is array of subarray with length 5
+    //     return resultArray;
+    // }, [])
+
+
+
+

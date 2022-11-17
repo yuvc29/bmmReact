@@ -56,18 +56,22 @@
     padding: 10px;
 }
 
+
+
 .movieNameandticketbook {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .movieNamebook {
-    width: 50%;
-    margin: 10px;
+    /* width: 50%; */
+    /* margin: 10px; */
     font-weight: bold;
 }
 
 .movieTicketbookinfo {
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 .TicketAmountInfo {
@@ -116,16 +120,7 @@
 }
 
 
-.paymentBarBtn{
- width: 140px;
-height: 10px;
+.paymentBarBtn {
+    width: 140px;
+    height: 10px;
 }
-
-
-
-
-
-
-
-
-

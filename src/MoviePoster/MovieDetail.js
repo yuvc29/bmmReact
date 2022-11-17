@@ -87,14 +87,14 @@ function MovieDetail(props) {
                         </div>
                     </div>
 
-                     <div className='GoToTrailersTitleIcon'>
-                    <a className='GoToTrailers' 
-                      href={trailer}  target="_blank" rel="noreferrer"
-                     >Trailers (1)</a>
+                    <div className='GoToTrailersTitleIcon'>
+                        <a className='GoToTrailers'
+                            href={trailer} target="_blank" rel="noreferrer"
+                        >Trailers (1)</a>
 
-                     <PlayCircleOutlineIcon 
-                      className='GoToTrailers GoToTrailersIcon'/>
-                     </div>
+                        <PlayCircleOutlineIcon
+                            className='GoToTrailers GoToTrailersIcon' />
+                    </div>
 
                 </div>
 
@@ -159,12 +159,6 @@ function MovieDetail(props) {
                     </div>);
                 })}
 
-                {/* <div className="Actor_picAndName">
-                    <img className="Actor_pic"
-                        src={poster}
-                        alt="" />
-                    <span className="Actor_name">{title}</span>
-                </div> */}
 
             </div>
 
@@ -180,10 +174,15 @@ export default MovieDetail;
 
 
 
+//For dummy actor
 
 
-
-
+{/* <div className="Actor_picAndName">
+                    <img className="Actor_pic"
+                        src={poster}
+                        alt="" />
+                    <span className="Actor_name">{title}</span>
+                </div> */}
 
 
 

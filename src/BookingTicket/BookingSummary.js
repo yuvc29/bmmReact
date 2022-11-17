@@ -1,37 +1,137 @@
 import React, { useState } from "react";
 import './BookingSummary.css';
 
-
-
 import { RadioButton, RadioGroup } from "react-radio-buttons";
 import { Button } from "antd";
 import { Link, useLocation } from "react-router-dom";
 
-
+import axois from 'axios';
+import axios from 'axios';
 
 function BookingSummary() {
 
   const location = useLocation();
-  const { title, Hall_Name, Total_ticket, total_ticket_price, seat_type, poster, selected_Seat_Num } = location.state;
-
-  // const seatNumber = JSON.parse(selected_Seat_Num);
-  // console.log(" This is seat " + seatNumber[0].row);
+  const { seatList, title, Hall_Name, Hall_Address, Total_ticket, total_ticket_price, seat_type, poster, Selected_date, Selected_time, showId, selected_Seat_Num, ticket, orderObj, orderId } = location.state;
 
 
-  let final_ticket_price = total_ticket_price + 125 - 25;
+  let selected_Seat_Numf = JSON.parse(selected_Seat_Num);
+  let ticketf = JSON.parse(ticket);
+  let seatListf = [];
+  let orderObjf = JSON.parse(orderObj);
 
-  const [redirectPage, setRedirectPage] = useState('');
+  console.log("this is orderid from ticket", orderObjf);
+
+  ticketf.seats.map((seat) => {
+    const temp = parseInt(seat.row.toString() + seat.col.toString());
+    seatListf.push(temp);
+
+  })
+
+  console.log("this is seatListf", seatListf);
+
+
+
+  const PostTransaction = async (transactionObj) => {
+    try {
+      let response = await axios.post(`/transaction`, transactionObj);
+      // console.log("******Shows***", response);
+      return response;
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const PostCreditCard = async (cardObj) => {
+    try {
+      let response = await axios.post(`/card`, cardObj);
+      // console.log("******Shows***", response);
+      return response;
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const PostBookedSeats = async (seatObj) => {
+    try {
+      let response = await axios.post(`/seat`, seatObj);
+      // console.log("******Shows***", response);
+      return response;
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+  let final_ticketf_price = orderObjf.amount + 125 - 25;
 
   const [emailAdress, setEmailAdress] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
 
-  const [creditCardNum, setCreditCardNum] = useState('');
-  const [cardHolder, setCardHolder] = useState('');
+  const [number, setNumber] = useState('');
+  const [name, setName] = useState('');
   const [expireMonth, setExpireMonth] = useState('');
   const [expireYear, setExpireYear] = useState('');
-  const [creditPass, setCreditPass] = useState('');
+  const [cvv, setCvv] = useState('');
+
+  const [expiry, setExpiry] = useState('')
+  const [focused, setFocused] = useState('name');
+  const [index, setIndex] = useState(0)
+  const [type, setType] = useState('visa')
 
 
+  const onChange = (form) => {
+    console.log(form);
+  }
+
+  const handlePayment = async () => {
+
+    setExpiry(expireMonth + "/" + expireYear)
+
+
+    let cardObj = {
+      cardNo: number,
+      name: name,
+      cvv: cvv,
+      expDate: expiry,
+      userId: 329,                    // user-Id hard coded
+    }
+
+    const crrResponse = await PostCreditCard(cardObj);
+    console.log("Credit Card Post Status", crrResponse.status);
+
+    let transactionObj = {
+      orderId: orderObjf.orderId,
+      status: "true",
+    }
+
+
+
+    const tranResponse = await PostTransaction(transactionObj);
+    console.log(" Transaction Post Status", tranResponse.status);
+
+    console.log("Something is wrong ", seatListf)
+    seatListf.map(async (seatNo) => {
+      let seatObj = {
+        showId: showId,
+        seatNo: seatNo,
+        price: 100,
+        orderId: orderId,
+      }
+
+      const seatBookingResponse = await PostBookedSeats(seatObj);
+      console.log(" Seat Post Status for", seatNo, ":", seatBookingResponse.status)
+    })
+
+
+  }
 
 
   const handleEmailAdress = (e) => {
@@ -45,14 +145,15 @@ function BookingSummary() {
   }
 
 
+
   const handleCardNumber = (e) => {
-    setCreditCardNum(e.target.value);
+    setNumber(e.target.value);
     // console.log(e.target.value);
   }
 
   const handleHolderName = (e) => {
-    setCardHolder(e.target.value);
-    // console.log(cardHolder);
+    setName(e.target.value);
+    // console.log(name);
   }
 
   const handleExpMonth = (e) => {
@@ -63,21 +164,12 @@ function BookingSummary() {
     setExpireYear(e.target.value);
   };
 
-  const handleCreditPass = (e) => {
-    setCreditPass(e.target.value);
+  const handlecvv = (e) => {
+    setCvv(e.target.value);
   }
 
 
-  const validation = () => {
-    if (emailAdress === '' || phoneNum === '' || creditCardNum === '' || creditPass === '' || cardHolder === ''
-      || expireMonth === '' || expireYear === '') {
-      alert(`${cardHolder} Please fill all details for bokking seats`);
-      setRedirectPage('/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details');
-    }
-    else {
-      setRedirectPage('/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/Ticket-details');
-    }
-  }
+
 
   return (
 
@@ -98,10 +190,11 @@ function BookingSummary() {
                   <span style={{ marginBottom: "30px" }}>Enter Phone Number</span>
                 </div>
 
-                <div className="TicketAmountInfoPrice TicketAmountInfoPriceAmount">
+                <div className="TicketAmountInfoPrice tTicketAmountInfoPriceAmount">
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
                     type="email" placeholder="Enter Email Address" required
                     onChange={(e) => { handleEmailAdress(e) }} />
+
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
                     type="tel" placeholder="Enter Phone Number" required
                     onChange={(e) => { handlePhoneNum(e) }} />
@@ -112,7 +205,7 @@ function BookingSummary() {
 
           </div>
 
-          <span className="receiptBookingSummary">ENTER CaARD DETAILS</span>
+          <span className="receiptBookingSummary">ENTER CARD DETAILS</span>
           <div className="ContactCardDetailEnter">
 
             <form className="form">
@@ -127,6 +220,7 @@ function BookingSummary() {
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
                     type="email" placeholder="Enter Card Numbe" required
                     onChange={(e) => { handleCardNumber(e) }} />
+
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
                     type="tel" placeholder="Card Holder Name" required
                     onChange={(e) => { handleHolderName(e) }} />
@@ -176,7 +270,7 @@ function BookingSummary() {
                     size={3}
                     placeholder="CVV"
                     required
-                    onChange={(e) => { handleCreditPass(e) }}
+                    onChange={(e) => { handlecvv(e) }}
                   />
                 </div>
 
@@ -185,22 +279,29 @@ function BookingSummary() {
 
 
           </div>
-          <Link to={redirectPage}
+          <Link to='/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/ticket-details'
             state={{
-              // seatNumber: JSON.stringify(seatNumber),
-              title: title,
+
+              title: "kjahs",
+              poster: poster,
+
               Hall_Name: Hall_Name,
+              Hall_Address: Hall_Address,
+
               Total_ticket: Total_ticket,
               total_ticket_price: total_ticket_price,
               seat_type: seat_type,
-              poster: poster,
+              seatListf: JSON.stringify(seatListf),
 
-              Holder_name: cardHolder,
-              Transaction_Id: creditCardNum,
+              Selected_date: Selected_date,
+              Selected_time: Selected_time,
+
+              Holder_name: name,
+              Transaction_Id: number,
             }}
 
-            onClick={() => { validation() }}
->
+            onClick={() => { handlePayment() }}
+          >
             <Button className="paymentBarBtn"
               style={{ marginBottom: "20px" }}>Make Payment</Button>
           </Link>
@@ -212,10 +313,12 @@ function BookingSummary() {
           <span className="receiptBookingSummary">BOOKING SUMMARY</span>
 
           <div className="movieNameandticketbook">
-            <span className="movieNamebook">{title},</span>
-            <span className="movieTicketbook"> tickets - {Total_ticket}</span><br></br>
-            <span className="movieTicketbookinfo"> Selected seat: {seat_type} ({Hall_Name}) </span>
-
+            <span className="movieNamebook">{title}</span>
+            <span className="movieTicketbookinfo movieNamebook"> Date - {Selected_date}</span>
+            <span className="movieTicketbookinfo movieNamebook"> Time - {Selected_time}</span><br></br>
+            <span className="movieTicketbookinfo">Total Tickets - {Total_ticket}</span>
+            <span className="movieTicketbookinfo"> Theater Address: {Hall_Name} ({Hall_Address})</span>
+            <span className="movieTicketbookinfo"> Selected seat: {seat_type}</span>
           </div>
 
           <div className="TicketAmountInfo">
@@ -227,27 +330,27 @@ function BookingSummary() {
             </div>
 
             <div className="TicketAmountInfoPrice TicketAmountInfoPriceAmount">
-              <span>	&nbsp;Rs. {total_ticket_price}</span>
+              <span>	&nbsp;Rs. {orderObjf.amount}</span>
               <span>	&nbsp;Rs. 125</span>
               <span>-Rs. 25</span>
               <span style={{ borderTop: "1px solid black", marginTop: "10px" }}>Rs.
-                {final_ticket_price}
+                {final_ticketf_price}
               </span>
             </div>
           </div>
 
 
           <div className="SelectedTicketColletionType">
-            <span style={{ fontSize: "22px", color: "#969696" }}>SELECT TICKET TYPE</span>
+            <span style={{ fontSize: "22px", color: "#969696" }}>SELECT TICKETS TYPE</span>
 
             <RadioGroup horizontal>
               <RadioButton
                 rootColor="#4E1427"
                 pointColor="#f14c63"
-                value="M-Ticket"
+                value="M-ticketf"
 
               >
-                M-Ticket
+                M-TICKETS
               </RadioButton>
               <RadioButton
                 rootColor="#4E1427"
@@ -266,13 +369,13 @@ function BookingSummary() {
       <div className="note">
         <h5 style={{ color: "gray" }} >Note:</h5>
         <p>
-          i . Registrations/Tickets once booked cannot be exchanged, cancelled or
+          i . Registrations/ticketfs once booked cannot be exchanged, cancelled or
           refunded.
         </p>
         <p>
           ii . In case of Credit/Debit Card bookings, the Credit/Debit Card and
-          Card holder must be present at the ticket counter while collecting the
-          ticket(s).
+          Card holder must be present at the ticketf counter while collecting the
+          ticketf(s).
         </p>
       </div>
 

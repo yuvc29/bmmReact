@@ -1,9 +1,10 @@
 .navbar {
     background-color: white;
-    top: 0px;
     position: fixed;
-    width: 100%;
-
+    top: -8px;
+    left: -17px;
+    width: 102%;
+    height: 104px;
     z-index: 1;
     /* border: 1px solid green; */
 
@@ -22,7 +23,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    left: 10%;
+    left: 16%;
 
     /* border: 1px solid red; */
 }
@@ -44,8 +45,8 @@
 }
 
 .searchMovies {
-    width: 600px;
-    padding: 5px;
+    width: 500px;
+    padding: 3px;
     border-radius: 5px;
     outline: none;
     border: none;
@@ -60,7 +61,7 @@
     flex-direction: row-reverse;
     align-items: center;
     position: relative;
-    right: 10%;
+    right: 17%;
 
     /* border: 1px solid red; */
 }
@@ -110,7 +111,7 @@
 .navbarBottomAllOptionsLeft {
     width: 50%;
     position: relative;
-    left: 10%;
+    left: 15.5%;
 
     /* border: 1px solid red; */
 }
@@ -135,7 +136,7 @@
     display: flex;
     flex-direction: row-reverse;
     position: relative;
-    right: 10%;
+    right: 17%;
 
     /* border: 1px solid green; */
 }

@@ -11,50 +11,133 @@ import { useEffect, useState } from "react"
 import BookingSummary from "../BookingTicket/BookingSummary";
 import { Link, useLocation } from 'react-router-dom';
 
+import axois from 'axios';
+import axios from 'axios';
+
+
 const SeatMatrix = () => {
 
 const location = useLocation();
-const { title, Hall_Name, Selected_date, Selected_time, total_seat, alltiming, poster, showId } = location.state;
+const { title, Hall_Name, Hall_Address, Selected_date, Selected_time, total_seat, alltiming, poster, showId } = location.state;
   
 const AllTiming=JSON.parse(alltiming);
 // console.log("This is array" + AllTiming[0].timing);
 
-
-const [DisplayBookedSeatArray, setDisplayBookedseateArray] = useState([]);
-
-const GetSeatsbyShowId = async(showId) => {
-	
-   fetch(`/seat/show/${showId}`)
-      .then((response) => response.json())
-      .then((json) => {
-        let newBookedSeatArray = json;
-        console.log("This is my Movie " + json);
-        setDisplayBookedseateArray(newBookedSeatArray);
-      });
-}
-
-  useEffect(() => {
-    GetSeatsbyShowId(showId);
-  }, []);
-
+   console.log("This is show id ",showId);
+    const R = 11;
+    const C = 23;
+    
+    
+    const [enabledPaymentRedirect, setEnabledPaymentRedirect] = useState(false);
+    const [selectedCount, setSelectedCount] = useState(0);
+    const [isModalVisible, setModalVisible] = useState(true);
+    const [booked , setBooked] = useState([]);
+    const [authenticated, setAuthenticated] = useState(true);
+    const [amount, setAmount ] = useState(0);
+    const [couponId, setCouponId] = useState(1);   
 
 
     const [selected_Seat_Num, setSelected_Seat_Num ] = useState([]); 
     const [buttonTimeId, setButtonTimeId] = useState(Selected_time);
+   
+  
     
-    const R = 11;
-    const C = 23;
-
-//  const [authenticated, setAuthenticated] = useState(true);
-    const [isModalVisible, setModalVisible] = useState(true);
-    const [enabledPaymentRedirect, setEnabledPaymentRedirect] = useState(false);
-    const [selectedCount, setSelectedCount] = useState(0);
     const [ticket, setTicket] = useState({
         seats: [],
         seatCount: total_seat,
         seatPrice: 100,
     })
+    
+  let seatList= [];
+
+     useEffect(() => {
+        setAmount(selectedCount*(ticket.seatPrice));
+    }, [selectedCount])
  
+
+    const GetSeatsbyShowId = async(showId) => {
+	  try {
+		 let response =  await axios.get(`/seat/show/${showId}`);
+		// console.log("******Shows***", response);
+		 return response;
+	  }
+
+	   catch (error) {
+		   console.log(error);
+	  }
+   }
+
+
+
+   useEffect(() => {
+        const fetchData = async() => {
+            let response = await GetSeatsbyShowId(showId);
+            const seatList = response.data;
+
+            console.log("Seat Lists", seatList);
+            setBooked(seatList);
+        }
+        fetchData();
+     }, [])
+
+
+     
+const PostMyOrder = async(orderObj) => {
+	   try {
+		  let response =  await axios.post(`/order`, orderObj);
+		  // console.log("******Shows***", response);
+		  return response;
+	   }
+
+	    catch (error) {
+		  console.log(error);
+	   }
+   }
+
+     
+   let orderObj = {
+            showId:showId,
+            userId:329,                                 // hard Coded , have to change after log in integration
+            amount : amount,
+            couponId: couponId,
+            amountAfterDiscount : amount,  
+     }
+
+    let orderId=1111; //Hard coded because i could able to get the orderId from anywhere;
+
+   const handleSubmit = async() => {
+        // ReserveBookedSeats();                         //hold seats for some time
+        orderObj = {
+            showId:showId,
+            userId:329,                                 // hard Coded , have to change after log in integration
+            amount : amount,
+            couponId: couponId,
+            amountAfterDiscount : amount,  
+        }
+
+       
+        const response = PostMyOrder(orderObj);
+        console.log("Order Post Response Status" ,(await response));
+
+         
+
+        orderObj = (await response).data;
+        console.log("Order Post Response Data" ,orderObj);  
+
+        //  seatList= [];
+            
+        ticket.seats.map((seat)=> {
+            const temp = parseInt(seat.row.toString() + seat.col.toString());
+            seatList.push(temp);
+           
+        })
+             
+           //After login  integration successull move to "/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details" else move to Login_Page;
+        // (authenticated?navigation.navigate("PaymentPage", { seatList : seatList, ticket : ticket , orderObj: orderObj , movieItem:route.params.movieItem,  theaterItem: route.params.theaterItem, showItem : route.params.showItem, date : route.params.date}):navigation.navigate("Login"));
+        
+};
+
+
 
     const onSelect = (e, index, cindex) => {
         if (selectedCount >= ticket.seatCount) {
@@ -62,24 +145,22 @@ const GetSeatsbyShowId = async(showId) => {
             return;
         }
         
-        let recentlySeletSeat = {
+        let recentlySeletedSeat = {
             row: index,
             col: cindex
         }
         
-        
-        const data = [...ticket.seats, recentlySeletSeat];
-
+    
+        const data = [...ticket.seats, recentlySeletedSeat];
         setTicket({ ...ticket, seats: data })
 
         if (selectedCount + 1 >= ticket.seatCount) {
             setEnabledPaymentRedirect(true);
         }
 
-        setSelectedCount(selectedCount + 1);
+         setSelectedCount(selectedCount + 1);
+     }
 
-
-    }
 
     const unSelect = (e, index, cindex) => {
         if (selectedCount - 1 < ticket.seatCount) {
@@ -95,12 +176,13 @@ const GetSeatsbyShowId = async(showId) => {
 
     const isOccupied = (index, cindex) => {
         const temp = parseInt(index.toString() + cindex.toString());
-        // console.log("booked ",DisplayBookedSeatArray,"temp", temp);
+         // console.log("booked ",booked,"temp", temp);  
+         
 
         let ans= false;
-        DisplayBookedSeatArray.map((book) => ans|=(book.seatNo === temp && book.orderId!==null));
         // console.log("ans",ans);
-
+   
+       booked.map((book) => ans|=(book.seatNo === temp && book.orderId!==null));
         return ans;
     }
 
@@ -110,6 +192,14 @@ const GetSeatsbyShowId = async(showId) => {
             return true;
         return false;
     }
+
+
+//Clear the concept of toggleModalVisibility;
+      const toggleModalVisibility = () => {
+        console.log("Toggling Count Seat Modal");
+        setModalVisible(!isModalVisible);
+    };
+
 
     let seatMatrixOfMall = <div className="seatMatrixOfHall">
 
@@ -207,6 +297,9 @@ const GetSeatsbyShowId = async(showId) => {
     </div>
 
 
+      
+
+
     return (
         <div className="seatmatrixbody">
             <div className="movie_desc_bar">
@@ -242,21 +335,36 @@ const GetSeatsbyShowId = async(showId) => {
             {seatMatrixOfMall}
 
             {enabledPaymentRedirect ? (
+      
                 <span className="paymentBar">
                     <Link to="/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details"
                         state={{
-                            selected_Seat_Num: JSON.stringify(selected_Seat_Num),
-                             poster: poster,
-                            title: title,
-                            Hall_Name: Hall_Name,
-                            Total_ticket: selectedCount,
-                            total_ticket_price: selectedCount * ticket.seatPrice,
-                            seat_type: "Gold",
-                            
+                            selected_Seat_Num: JSON.stringify(selected_Seat_Num),//ticket_seat_Location_info
+                            Total_ticket: selectedCount, //ticket_seat_count
+                            total_ticket_price: selectedCount * ticket.seatPrice,//ticket_price
+                            ticket:  JSON.stringify(ticket),//(booked_seatArray, seatCount, ticket_Price)
+
+      //seatList : seatList  Not working properly so i used ticket.seats in BookingSummary compo to get all seats;
+                            // seatList : JSON.stringify(seatList),//All_seat_Location_info
+                             seat_type: "Gold", //Seat_Type
+
+                             poster: poster,//Movie_Poster
+                             title: title, //Movie_title
+   
+                             Hall_Name: Hall_Name,//Theater_Name
+                             Hall_Address:Hall_Address,//Theater_Address
+
+                             orderObj: JSON.stringify(orderObj),//it's object of all info of reserveBooked Seats
+                             orderId:orderId, //orderId is hard coded in just below the let orderObj;                               
+
+                             Selected_date: Selected_date,//Show_Item
+                             Selected_time: Selected_time,//Show_Item
+                             showId: showId, //Show_Item
                         }}>
+
                         <Button className="paymentBarBtn"
                             type="primary" style={{ backgroundColor: "#f84464" }}
-                        // onClick={() =>{alert("jai shree ram"); ShowBookingSummaryPage()}}
+                        onClick={() =>{  handleSubmit(); console.log("SeatList = ", seatList)}}
                         >
                             <span style={{ color: "white" }}>
                                 Total : {selectedCount * ticket.seatPrice}
@@ -279,6 +387,27 @@ export default SeatMatrix;
 
 
 //For dummy seat adding.. wrire in onselect function in last;
+
+//const [DisplayBookedSeatArray, setDisplayBookedseateArray] = useState([]);
+
+
+// const GetSeatsbyShowId = async(showId) => {
+	
+//    fetch(`/seat/show/${showId}`)
+//       .then((response) => response.json())
+//       .then((json) => {
+//         let newBookedSeatArray = json;
+         
+//        console.log("Seat Lists", newBookedSeatArrayt)
+//        setBooked(newBookedSeatArray);
+    
+//         setDisplayBookedseateArray(newBookedSeatArray);
+//       });
+// }
+
+//   useEffect(() => {
+//     GetSeatsbyShowId(showId);
+//   }, []);
 
 // let newsetSelected_Seat_Num = selected_Seat_Num;
         // newsetSelected_Seat_Num.push(recentlySeletSeat);

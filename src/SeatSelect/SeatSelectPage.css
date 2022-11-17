@@ -1,0 +1,31 @@
+.SeatContainer {
+   position: absolute;
+   border: 2px solid #000;
+   background-Color: gray;
+   box-Shadow: 2px solid black;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.SeatContainer{
+   display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SeatContainerselection {}
+
+
+.SeatContainerTheaterSeats {
+   display: flex;
+}
+
+
+.SeatContainerTheaterSeatsnum {
+   border: 1px solid red;
+}
+
+.SeatContainerSeatSelected {}

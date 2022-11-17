@@ -34,21 +34,21 @@ function Navbar() {
         <div className="navbar">
             <div className="navbarTop">
                 <div className="navbarTopLeft">
-<Link to="/">
-                    <a href="" className="logo">BookmyMovie</a>
-</Link>
+                    <Link to="/">
+                        <a href="" className="logo">BookmyMovie</a>
+                    </Link>
                     <Link to="/movie-details-By- search movie-name">
-                    <input type="text" className="searchMovies"
-                        placeholder='search for movies, plays, events, sports ....'
-                        onClick={() => { ShowList() }} />
-                       </Link>
+                        <input type="text" className="searchMovies"
+                            placeholder='search for movies, plays, events, sports ....'
+                            onClick={() => { ShowList() }} />
+                    </Link>
                 </div>
                 <div className="navbarTopRight">
                     <MenuIcon className="menu"></MenuIcon>
                     <button onClick={() => console.log("sign in")} className="signIn">Sign-in</button>
                     <div className="currentLocation">
                         <select className="currentLocationOptions">
-                            <option  value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
+                            <option value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
                             <option value="NOIDA" selected className="currentLocationCity">NOIDA</option>
                             <option value="GAJIYABAD" className="currentLocationCity">GAJIYABAD</option>
                             <option value="GURUGRAM" className="currentLocationCity">GURUGRAM</option>
@@ -61,19 +61,19 @@ function Navbar() {
             </div>
             <div className="navbarBottom">
                 <div className="navbarBottomAllOptionsLeft">
-                    <a href="_blank" className="navbarBottomOptionsLeft">Movies</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Stream</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Events</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Plays</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Sports</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Acitvies</a>
-                    <a href="_blank" className="navbarBottomOptionsLeft">Buzz</a>
+                    <a href="" className="navbarBottomOptionsLeft">Movies</a>
+                    <a href="" className="navbarBottomOptionsLeft">Stream</a>
+                    <a href="" className="navbarBottomOptionsLeft">Events</a>
+                    <a href="" className="navbarBottomOptionsLeft">Plays</a>
+                    <a href="" className="navbarBottomOptionsLeft">Sports</a>
+                    <a href="" className="navbarBottomOptionsLeft">Acitvies</a>
+                    <a href="" className="navbarBottomOptionsLeft">Buzz</a>
                 </div>
                 <div className="navbarBottomAllOptionsRight">
-                    <a href="_blank" className="navbarBottomOptionsRight">Gift Card</a>
-                    <a href="_blank" className="navbarBottomOptionsRight">Offers</a>
-                    <a href="_blank" className="navbarBottomOptionsRight">Corporates</a>
-                    <a href="_blank" className="navbarBottomOptionsRight">ListYourMovies</a>
+                    <a href="" className="navbarBottomOptionsRight">Gift Card</a>
+                    <a href="" className="navbarBottomOptionsRight">Offers</a>
+                    <a href="" className="navbarBottomOptionsRight">Corporates</a>
+                    <a href="" className="navbarBottomOptionsRight">ListYourMovies</a>
 
                 </div>
             </div>
@@ -82,3 +82,13 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+

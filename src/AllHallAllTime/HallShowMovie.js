@@ -12,19 +12,17 @@ import { Link, useLocation } from 'react-router-dom';
 import axois from 'axios';
 import axios from 'axios';
 
-//Array of theater;
-// import HallNameAndTiming from '../AllArray/HallNameAndTimingArray';
 
 function HallShowMovies() {
 
     const location = useLocation();
     const { movieId, title, language, format, poster } = location.state;
   
-
+     
     const dateArray = [{date_formate: '22/11/2022'}, {date_formate: '23/11/2022'}];
     const [date_formate, setDate_formate] = useState(dateArray[0].date_formate);
 
-    const [selected_seat, setselected_seat] = useState(3);
+    const [selected_seat, setselected_seat] = useState(0);
 
     const [theatreList, setTheatreList] = useState([]);
     const [city_Id, setCity_Id] = useState(1);
@@ -101,8 +99,8 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
 
         <div className='HallShowMovies'>
 
+          <div className='HallShowMoviesNavBarParent'>
             <div className="HallShowMoviesNavBar">
-
                 <div className="HallShowMoviesNavBarTop">
                     <a href="" className="HallShowMoviesNavBarTop0">{title}</a>
                     <a href="" className="HallShowMoviesNavBarTop0">-</a>
@@ -113,8 +111,8 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
                     <span className="HallShowMoviesNavBarBottom0">{format}</span>
                     <span className="HallShowMoviesNavBarBottom0">HORROR</span>
                 </div>
-
             </div>
+       </div>
 
             <div className='HalltimefilterforDate'>
                 {dateArray.map((dateArray, index) => {
@@ -153,12 +151,17 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
                                     <Link to="/movie-details/Hall-name_and_date-time/MallSeatMatrix"
                                         state={{
                                             title: title,
-                                             poster:poster,
-                                            alltiming: JSON.stringify(theatreListnametiming.timings),
+                                            poster:poster,
+
                                             Hall_Name: theatreListnametiming.theatreName,
+                                            Hall_Address: theatreListnametiming.address, 
+                                            total_seat: selected_seat,
+
+                                            alltiming: JSON.stringify(theatreListnametiming.timings),
+
                                             Selected_time: Showtimings.timing,
                                             Selected_date: date_formate,
-                                            total_seat: selected_seat,
+                                            
                                              showId:Showtimings.showId, 
 
                                         }}>
@@ -181,7 +184,23 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
 export default HallShowMovies;
 
 
+
+
+
+
+
+
+
+
+
+
 //For Dummy example
+
+
+//Array of theater;
+// import HallNameAndTiming from '../AllArray/HallNameAndTimingArray';
+
+
 //  function ShowHallArray(date_formate) {
 
 //     //To get All theater for particular movie on particular date; 

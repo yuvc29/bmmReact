@@ -7,29 +7,29 @@ import StarIcon from '@mui/icons-material/Star';
 import { Link } from 'react-router-dom';
 
 function MovieDetailCard(props) {
- 
+
 
     return (
-        <div  onClick={()=>{alert(props.Movie.movieId)}}
+        <div onClick={() => { alert(props.Movie.movieId) }}
             className="carousel-item1">
-             
-            
+
+
             <Link to='/Movie-details' state={{
                 movieId: props.Movie.movieId,
                 title: props.Movie.title,
                 releaseDate: props.Movie.releaseDate,
                 rating: props.Movie.rating,
                 length: props.Movie.length,
-                ageRating:props.Movie.ageRating,
+                ageRating: props.Movie.ageRating,
                 description: props.Movie.description,
-//likes Not defined in database that's why i used static likes;
+                //likes Not defined in database that's why i used static likes;
                 // likes: props.Movie.likes, 
                 likes: "12",
                 poster: props.Movie.poster,
                 trailer: props.Movie.trailer,
                 language: props.Movie.language,
                 format: props.Movie.format,
-                  
+
 
             }}>
                 <img className="d-block_w-100"

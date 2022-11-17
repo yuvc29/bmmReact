@@ -1,19 +1,18 @@
-
 .ticketPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-/* border: 1px solid black; */
-width: 35%;
-padding: 20px;
+    /* border: 1px solid black; */
+    width: 35%;
+    padding: 20px;
 
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-   border-top: 20px solid #1f2533;
-border-bottom: 20px solid #1f2533;
-border-left: 10px solid #1f2533;
-border-right: 10px solid #1f2533;
+    border-top: 20px solid #1f2533;
+    border-bottom: 20px solid #1f2533;
+    border-left: 10px solid #1f2533;
+    border-right: 10px solid #1f2533;
 
 }
 
@@ -24,16 +23,16 @@ border-right: 10px solid #1f2533;
 
 .ticketContainer {
     /* border: 1px solid blue; */
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .insidetkt {
     background-color: #fff;
 }
 
-.ticketHeadAll{
-display: flex;
+.ticketHeadAll {
+    display: flex;
 }
 
 .ticketHead {
@@ -68,11 +67,3 @@ display: flex;
 .finalLinks {
     margin-top: 10px;
 }
-
-
-
-
-
-
-
-

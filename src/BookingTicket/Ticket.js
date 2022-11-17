@@ -8,10 +8,10 @@ function Ticket() {
 
   const location = useLocation();
   const { title, Hall_Name, Total_ticket, total_ticket_price, seat_type, poster, Holder_name,
-    Transaction_Id, } = location.state;
-    
-// console.log("this is final seat "+seatNumber);
-  const seat_Number = [{row:1, col:0},{row:1, col:0},{row:1, col:0}];
+   Transaction_Id, } = location.state;
+
+  // console.log("this is final seat "+seatNumber);
+  const seat_Number = [{ row: 1, col: 0 }, { row: 1, col: 0 }, { row: 1, col: 0 }];
 
 
   // console.log("this is poster"+poster);
@@ -74,3 +74,8 @@ function Ticket() {
 
 
 export default Ticket;
+
+
+
+
+
