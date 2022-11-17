@@ -11,7 +11,6 @@ import { useEffect, useState } from "react"
 import BookingSummary from "../BookingTicket/BookingSummary";
 import { Link, useLocation } from 'react-router-dom';
 
-import axois from 'axios';
 import axios from 'axios';
 
 
@@ -118,12 +117,12 @@ const PostMyOrder = async(orderObj) => {
        
         const response = PostMyOrder(orderObj);
         console.log("Order Post Response Status" ,(await response));
-
          
 
         orderObj = (await response).data;
         console.log("Order Post Response Data" ,orderObj);  
 
+        orderId = orderObj.orderId;  // getting from api
         //  seatList= [];
             
         ticket.seats.map((seat)=> {

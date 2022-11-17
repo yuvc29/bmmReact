@@ -22,13 +22,6 @@ function Ticket() {
     
     return (  <div className="ticketPageCont">
     <div className="ticketPage">
-      {/* <Alert
-        message="Booking success"
-        description="Your ticket is booked and can be downloaded through link below."
-        type="success"
-        showIcon
-        closable
-      /> */}
 
       <div className="ticketContainer">
         <img

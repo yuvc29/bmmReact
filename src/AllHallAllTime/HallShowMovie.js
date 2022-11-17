@@ -9,7 +9,6 @@ import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import Navbar from '../MainNavbar/Navbar';
 import { Link, useLocation } from 'react-router-dom';
 
-import axois from 'axios';
 import axios from 'axios';
 
 
