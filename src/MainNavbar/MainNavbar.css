@@ -16,15 +16,18 @@
     padding: 14px 0px;
     display: flex;
     align-items: center;
+
+
 }
 
 .navbarTopLeft {
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
-    left: 16%;
+    left: 17%;
 
+   z-index: 10;
     /* border: 1px solid red; */
 }
 
@@ -45,7 +48,7 @@
 }
 
 .searchMovies {
-    width: 500px;
+    width: 600px;
     padding: 3px;
     border-radius: 5px;
     outline: none;
@@ -55,13 +58,17 @@
     text-align: center;
 }
 
+.searchMoviesNav{
+    width: 500px;
+ }
+
 .navbarTopRight {
-    width: 50%;
+    width: 150%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     position: relative;
-    right: 17%;
+    right: 18%;
 
     /* border: 1px solid red; */
 }
@@ -106,13 +113,16 @@
     padding: 7px;
     display: flex;
     align-items: center;
+
+
 }
 
 .navbarBottomAllOptionsLeft {
     width: 50%;
     position: relative;
-    left: 15.5%;
+    left: 16.5%;
 
+   z-index: 10;
     /* border: 1px solid red; */
 }
 
@@ -136,7 +146,7 @@
     display: flex;
     flex-direction: row-reverse;
     position: relative;
-    right: 17%;
+    right: 18%;
 
     /* border: 1px solid green; */
 }

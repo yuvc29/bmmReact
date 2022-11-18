@@ -34,14 +34,17 @@ function Navbar() {
         <div className="navbar">
             <div className="navbarTop">
                 <div className="navbarTopLeft">
-                    <Link to="/">
+                     <Link to="/">
                         <a href="" className="logo">BookmyMovie</a>
+
                     </Link>
                     <Link to="/movie-details-By- search movie-name">
-                        <input type="text" className="searchMovies"
+                        <input type="text" className="searchMovies searchMoviesNav"
                             placeholder='search for movies, plays, events, sports ....'
                             onClick={() => { ShowList() }} />
                     </Link>
+
+
                 </div>
                 <div className="navbarTopRight">
                     <MenuIcon className="menu"></MenuIcon>

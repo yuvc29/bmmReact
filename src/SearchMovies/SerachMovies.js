@@ -8,13 +8,8 @@ import MovieArray from '../AllArray/MovieArray';
 
 function SearchMovies() {
 
-    const [Display, setdisplay] = useState("block");
-    const [foundFilterItem, setFoundFilterItem] = useState([]);
-    const [searchedValue, setSearchedValue] = useState();
-
- const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
-
-function ShowMovieArray() {
+    const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
+    function ShowMovieArray() {
     fetch("/movie")
       .then((response) => response.json())
       .then((json) => {
@@ -28,6 +23,14 @@ function ShowMovieArray() {
   useEffect(() => {
     ShowMovieArray();
   }, []);
+
+
+
+    const [Display, setdisplay] = useState("block");
+    const [foundFilterItem, setFoundFilterItem] = useState([]);
+    const [searchedValue, setSearchedValue] = useState();
+
+
 
     const fiterMoview = (e) => {
         setSearchedValue(e.target.value);
@@ -44,6 +47,8 @@ function ShowMovieArray() {
         else {
             setdisplay("none")
         }
+        
+    console.log("result = ",results);
     }
 
 
@@ -75,30 +80,32 @@ function ShowMovieArray() {
             </div>
 
             <div className="searchedmoviespage">
-                {Display === "block" ?
-                    foundFilterItem.map((serachValue, index) => {
+                {Display==="block" ?
+                    foundFilterItem.map((foundMovie, index) => {
                         return (
-                            <Link to='/Movie-details' state={{
-                title: serachValue.title,
-                releaseDate: serachValue.releaseDate,
-                rating: serachValue.rating,
-                length: serachValue.length,
-                ageRating:serachValue.ageRating,
-                description: serachValue.description,
-//likes Not defined in database that's why i used static likes;
-                // likes: serachValue.likes, 
+                            <Link to='/Movie-details'
+                  state={{
+                movieId: foundMovie.movieId,
+                title: foundMovie.title,
+                releaseDate: foundMovie.releaseDate,
+                rating: foundMovie.rating,
+                length: foundMovie.length,
+                ageRating: foundMovie.ageRating,
+                description: foundMovie.description,
+                //likes Not defined in database that's why i used static likes;
+                // likes: foundMovie.likes, 
                 likes: "12",
-                poster: serachValue.poster,
-                language: serachValue.language,
-                format: serachValue.format,
-                  
+                poster: foundMovie.poster,
+                trailer: foundMovie.trailer,
+                language: foundMovie.language,
+                format: foundMovie.format,
 
             }}>
                                 <div className='searchmoviesfoundAndIcon'>
                                     <img src="https://in.bmscdn.com/webin/common/icons/search-movies.png"
                                         alt="" className="foundIcon" />
                                     <span className="searchmoviesfound">
-                                        {serachValue.title}
+                                        {foundMovie.title}
                                     </span>
                                 </div>
                             </Link> 

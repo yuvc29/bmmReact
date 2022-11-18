@@ -172,18 +172,3 @@ function MovieDetail(props) {
 export default MovieDetail;
 
 
-
-
-//For dummy actor
-
-
-{/* <div className="Actor_picAndName">
-                    <img className="Actor_pic"
-                        src={poster}
-                        alt="" />
-                    <span className="Actor_name">{title}</span>
-                </div> */}
-
-
-
-
