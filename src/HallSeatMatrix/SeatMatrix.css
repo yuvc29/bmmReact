@@ -29,11 +29,12 @@
 
 .movie_desc_bar-Left {
     color: #fff;
-    width: 50%;
+    width: 30%;
+margin-right: 100px;
     display: flex;
     flex-direction: column;
     position: relative;
-    left: 5%;
+    left: 3%;
 }
 
 .movie_desc_bar-Left-Top {
@@ -46,12 +47,19 @@
 
 }
 
+.SeatEntrySave{
+   display: flex;
+width: 400px;
+}
+
+
+
 .movie_desc_bar-Right {
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: row-reverse;
     position: relative;
-    right: 5%;
+    left: 5%;
 }
 
 .movie_desc_bar-Right-btn {
@@ -141,40 +149,57 @@
 }
 
 .seat {
+    font-size: 15px;
+    font-weight: bold;    
+    display: flex;
+    justify-content: center;
+    align-items: center;        
+
     width: 30px;
     height: 30px;
-    border: 1px solid #505050;
+    background: white;   
+    color: #1ea83c;
+    border: 1px solid #1ea83c;
     margin: 5px;
-    font-size: 0.5rem;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
     padding-top: 2px;
     cursor: pointer;
 }
 
 .selected {
-    font-size: 0.5rem;
+    font-size: 15px;
+    font-weight: bold;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 30px;
     height: 30px;
     margin: 5px;
-    background: #03fc2d;
-    border-radius: 10px 10px 0 0;
+    background: #1ea83c;   
+    color: white;
+    border: 1px solid #1ea83c;
     text-align: center;
     padding-top: 2px;
     cursor: pointer;
 }
 
 .occupied {
-    font-size: 0.5rem;
+    font-size: 15px;
+    font-weight: bold;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 30px;
     height: 30px;
-    background: #F84464;
+    background: #eee;
+      color: white;
     margin: 5px;
-    border-radius: 10px 10px 0 0;
+    border: none;
     text-align: center;
     padding-top: 2px;
     cursor: pointer;
+
 }
 
 

@@ -3,23 +3,24 @@ import './BookingSummary.css';
 
 import { RadioButton, RadioGroup } from "react-radio-buttons";
 import { Button } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import axois from 'axios';
 import axios from 'axios';
 
 function BookingSummary() {
 
+  let navigate = useNavigate();
   const location = useLocation();
-  const { title, Hall_Name, Hall_Address, Total_ticket, total_ticket_price, seat_type, poster, Selected_date, Selected_time, showId, selected_Seat_Num, ticket, orderObj, orderId } = location.state;
 
+  const { title, Hall_Name, Hall_Address, Total_ticket, total_ticket_price, seat_type, poster, Selected_date, Selected_time, showId, selected_Seat_Num, ticket, orderObj} = location.state;
 
-  let selected_Seat_Numf = JSON.parse(selected_Seat_Num);
-  let ticketf = JSON.parse(ticket);
-  let seatListf = [];
   let orderObjf = JSON.parse(orderObj);
 
-  console.log("this is orderid from ticket", orderObjf);
+  console.log("this is orderObj from booking compo = ", orderObjf);
+  console.log("this is orderId from booking compo  = ", orderObjf.orderId);
+
+  let ticketf = JSON.parse(ticket);
+  let seatListf = [];
 
   ticketf.seats.map((seat) => {
     const temp = parseInt(seat.row.toString() + seat.col.toString());
@@ -27,14 +28,10 @@ function BookingSummary() {
 
   })
 
-  console.log("this is seatListf", seatListf);
-
-
-
   const PostTransaction = async (transactionObj) => {
     try {
       let response = await axios.post(`/transaction`, transactionObj);
-      // console.log("******Shows***", response);
+      // console.log("******Shows*** from booking compo", response);
       return response;
     }
 
@@ -42,12 +39,11 @@ function BookingSummary() {
       console.log(error);
     }
   }
-
 
   const PostCreditCard = async (cardObj) => {
     try {
       let response = await axios.post(`/card`, cardObj);
-      // console.log("******Shows***", response);
+      // console.log("******Shows*** from booking compo", response);
       return response;
     }
 
@@ -56,11 +52,10 @@ function BookingSummary() {
     }
   }
 
-
   const PostBookedSeats = async (seatObj) => {
     try {
       let response = await axios.post(`/seat`, seatObj);
-      // console.log("******Shows***", response);
+      // console.log("******Shows*** from booking compo", response);
       return response;
     }
     catch (error) {
@@ -73,9 +68,10 @@ function BookingSummary() {
   let final_ticketf_price = orderObjf.amount + 125 - 25;
   
 
+  const [enabledPayment, setEnabledPayment] = useState(false);
+   
   const [emailAdress, setEmailAdress] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
-
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [expireMonth, setExpireMonth] = useState('');
@@ -83,19 +79,10 @@ function BookingSummary() {
   const [cvv, setCvv] = useState('');
 
   const [expiry, setExpiry] = useState('')
-  const [focused, setFocused] = useState('name');
-  const [index, setIndex] = useState(0)
-  const [type, setType] = useState('visa')
-
-
-  const onChange = (form) => {
-    console.log(form);
-  }
+ 
 
   const handlePayment = async () => {
-
     setExpiry(expireMonth + "/" + expireYear)
-
 
     let cardObj = {
       cardNo: number,
@@ -106,43 +93,70 @@ function BookingSummary() {
     }
 
     const crrResponse = await PostCreditCard(cardObj);
-    console.log("Credit Card Post Status", crrResponse.status);
+    console.log("Credit Card Post Status from booking compo", crrResponse.status);
 
     let transactionObj = {
       orderId: orderObjf.orderId,
       status: "true",
     }
 
-
-
     const tranResponse = await PostTransaction(transactionObj);
-    console.log(" Transaction Post Status", tranResponse.status);
+    console.log(" Transaction Post Status from booking compo", tranResponse.status);
 
-    console.log("Something is wrong ", seatListf)
+    console.log("List of selected seats from booking compo", seatListf);
+
     seatListf.map(async (seatNo) => {
       let seatObj = {
         showId: showId,
         seatNo: seatNo,
         price: 100,
-        orderId: orderId,
+        orderId: orderObjf.orderId,
       }
 
       const seatBookingResponse = await PostBookedSeats(seatObj);
-      console.log(" Seat Post Status for", seatNo, ":", seatBookingResponse.status)
+      console.log(" Seat Post Status for from booking compo", seatNo, ":", seatBookingResponse.status)
+    
     })
 
+   navigate("/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/Ticket-details"
+            , {state :{
+              title: title,
+              poster: poster,
+
+              Hall_Name: Hall_Name,
+              Hall_Address: Hall_Address,
+
+              Total_ticket: Total_ticket,
+              total_ticket_price: total_ticket_price,
+              seat_type: seat_type,
+              seatListf: JSON.stringify(seatListf),
+               ticketf: JSON.stringify(ticketf),
+
+              Selected_date: Selected_date,
+              Selected_time: Selected_time,
+
+              Holder_name: name,
+              Transaction_Id: number,
+   }}) ;
 
   }
 
-
+  let lengthOfInput=0;
+  
   const handleEmailAdress = (e) => {
-    setEmailAdress(e.target.value);
-    // console.log(e.target.value);
+      setEmailAdress(e.target.value);
+    //  console.log(e.target.value);
+     lengthOfInput=e.target.value.length;
+  
+     ifAllDetailsFilled();
   }
 
   const handlePhoneNum = (e) => {
     setPhoneNum(e.target.value);
     // console.log(e.target.value);
+    lengthOfInput=e.target.value.length;
+
+       ifAllDetailsFilled();
   }
 
 
@@ -150,26 +164,51 @@ function BookingSummary() {
   const handleCardNumber = (e) => {
     setNumber(e.target.value);
     // console.log(e.target.value);
+     lengthOfInput=e.target.value.length;
+
+     ifAllDetailsFilled();
   }
 
   const handleHolderName = (e) => {
     setName(e.target.value);
     // console.log(name);
+      lengthOfInput=e.target.value.length;
+
+      ifAllDetailsFilled();
   }
 
   const handleExpMonth = (e) => {
     setExpireMonth(e.target.value);
+  // console.log(e.target.value);
+     lengthOfInput=e.target.value.length;
+
+      ifAllDetailsFilled();
   };
 
   const handleExpYear = (e) => {
     setExpireYear(e.target.value);
+//  console.log(e.target.value);
+    lengthOfInput=e.target.value.length;
+
+    ifAllDetailsFilled();
   };
 
   const handlecvv = (e) => {
     setCvv(e.target.value);
+  // console.log(e.target.value);
+    lengthOfInput=e.target.value.length;
+
+    ifAllDetailsFilled();
   }
 
-
+  const ifAllDetailsFilled = ()=>{
+       if(lengthOfInput===0 || emailAdress==='' || phoneNum==='' || number==='' || name==='' || expireMonth==='' || expireYear==='' || cvv===''){
+           setEnabledPayment(false);
+          }
+        else{
+            setEnabledPayment(true)
+          }
+      }
 
 
   return (
@@ -193,8 +232,8 @@ function BookingSummary() {
 
                 <div className="TicketAmountInfoPrice tTicketAmountInfoPriceAmount">
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="email" placeholder="Enter Email Address" required
-                    onChange={(e) => { handleEmailAdress(e) }} />
+                    type="email" placeholder="Enter Email Address" required 
+                    onChange={(e) => { handleEmailAdress(e)}} value={emailAdress}/>
 
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
                     type="tel" placeholder="Enter Phone Number" required
@@ -219,7 +258,7 @@ function BookingSummary() {
 
                 <div className="TicketAmountInfoPrice TicketAmountInfoPriceAmount">
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
-                    type="email" placeholder="Enter Card Numbe" required
+                    type="email" placeholder="Enter Card Numbe" required 
                     onChange={(e) => { handleCardNumber(e) }} />
 
                   <input style={{ marginBottom: "30px", textAlign: "center" }}
@@ -280,33 +319,16 @@ function BookingSummary() {
 
 
           </div>
-          <Link to = "/movie-details/Hall-name_and_date-time/MallSeatMatrix/Bokking-details/Ticket-details"
-            state={{
 
-              title: title,
-              poster: poster,
-
-              Hall_Name: Hall_Name,
-              Hall_Address: Hall_Address,
-
-              Total_ticket: Total_ticket,
-              total_ticket_price: total_ticket_price,
-              seat_type: seat_type,
-              seatListf: JSON.stringify(seatListf),
-               ticketf: JSON.stringify(ticketf),
-
-              Selected_date: Selected_date,
-              Selected_time: Selected_time,
-
-              Holder_name: name,
-              Transaction_Id: number,
-            }}
-
-            onClick={() => { handlePayment() }}
-          >
+           {enabledPayment ?
+           
             <Button className="paymentBarBtn"
+              onClick={() => { handlePayment() }}
               style={{ marginBottom: "20px" }}>Make Payment</Button>
-          </Link>
+           :
+            <Button className="paymentBarBtn" 
+              style={{ marginBottom: "20px", opacity:"0.2", border:"none", outline:"none" }}>Make Payment</Button>}
+         
         </div>
 
 

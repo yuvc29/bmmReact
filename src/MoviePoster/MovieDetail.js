@@ -27,10 +27,8 @@ const { Header, Content, Footer } = Layout;
 const { Search } = Input
 
 function MovieDetail(props) {
-
-    let logo = "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-ODJrIGxpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331997-myeqyuplfu-portrait.jpg";
-
-    const location = useLocation()
+  
+   const location = useLocation();
     const { movieId, title, likes, poster, language, format, releaseDate, rating, length, ageRating, description, trailer } = location.state;
 
     //   console.log(releaseDate);
@@ -68,8 +66,8 @@ function MovieDetail(props) {
 
             <div className='MoviesPosterDetails'
                 style={{
-                    backgroundImage: "linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26 26 26 / 7%) 100%)"
-                    //  , backgroundImage:`url(${poster})`
+                    background: "linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26 26 26 / 7%) 100%)"
+                    //  , backgroundImage:`url(${poster})`, backgroundSize: "80% 80%"
                 }}>
 
                 <div className='MoviesPosterDetailsImageLeft'>

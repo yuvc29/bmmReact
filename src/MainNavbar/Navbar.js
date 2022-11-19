@@ -53,7 +53,7 @@ function Navbar() {
                         <select className="currentLocationOptions">
                             <option value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
                             <option value="NOIDA" selected className="currentLocationCity">NOIDA</option>
-                            <option value="GAJIYABAD" className="currentLocationCity">GAJIYABAD</option>
+                            <option value="GAJIYABAD" className="currentLocationCity">GHAZIABAD</option>
                             <option value="GURUGRAM" className="currentLocationCity">GURUGRAM</option>
                             <option value="PUNJAB" className="currentLocationCity">PUNJAB</option>
                             <option value="BIHAR" className="currentLocationCity">BIHAR</option>
