@@ -4,12 +4,12 @@ import './index.css';
 import Navbar from './MainNavbar/Navbar';
 import MoviesSlider from './PosterSlider/MoviesSlider';
 
-import SeatSelectPage from './SeatSelect/SeatSelectPage';
-function AllComponent() {
+// import SeatSelectPage from './SeatSelect/SeatSelectPage';
+function AllComponent({user, setUser, nav}) {
 
     return (<div>
 {/* <SeatSelectPage></SeatSelectPage> */}
-        <Navbar ></Navbar>
+        <Navbar user = {user} setUser = {setUser}  nav = {nav}></Navbar>
         <MoviesSlider></MoviesSlider>
     </div>
     );

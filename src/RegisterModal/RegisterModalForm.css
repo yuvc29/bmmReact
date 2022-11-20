@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+#components-form-demo-form-context .user {
+    margin-bottom: 4px;
+  }
+  
+  #components-form-demo-form-context .user .ant-avatar {
+    margin-right: 4px;
+  }
+  
+  .ant-row-rtl #components-form-demo-form-context .user .ant-avatar {
+    margin-right: 0;
+    margin-left: 4px;
+  }

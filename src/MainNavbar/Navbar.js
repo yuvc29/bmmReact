@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import './MainNavbar.css';
 
-import MenuIcon from '@mui/icons-material/Menu';
+import {Avatar} from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
+// import MenuIcon from '@mui/icons-material/Menu';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import SearchMovies from '../SearchMovies/SerachMovies';
 import { Link } from 'react-router-dom';
+import LoginModalForm from '../LoginModal/LoginModalForm';
+import RegisterModalForm from '../RegisterModal/RegisterModalForm'
+import axios from 'axios'
 
-function Navbar() {
+function Navbar({ user, setUser, nav}) {
 
     const [searchMovie, setSearchMovie] = useState("");
 
@@ -20,6 +26,15 @@ function Navbar() {
         <SearchMovies />
     </div>
 
+    const SignOut = ()=>{
+        //////////////////////////////////axios
+        const response =  axios.get("http://localhost:8080/logout")
+        // cookies.remove('Token');
+        // window.location.href = '/'
+        console.log(response)
+        setUser("")
+        window.localStorage.removeItem("isLoggedIn")
+    }
 
 
     const ShowList = () => {
@@ -47,8 +62,21 @@ function Navbar() {
 
                 </div>
                 <div className="navbarTopRight">
-                    <MenuIcon className="menu"></MenuIcon>
-                    <button onClick={() => console.log("sign in")} className="signIn">Sign-in</button>
+                    {
+                        user && user.length ? (
+                            <div>
+                                <a style = {{color:'white', margin:'10px'}}>Hi {user}</a>
+                                <Avatar size={32} icon={<UserOutlined />} />
+                                <button onClick={SignOut} className="signIn">Sign-out</button>
+                            </div>
+                        ): 
+                        // (<button onClick={() => setShowModal(true)} className="signIn">Sign-in</button>)
+                        (<div>
+                            <LoginModalForm setUser = {setUser} nav = {nav}/>
+                            <RegisterModalForm setUser = {setUser} nav = {nav}/>
+                        </div>)
+                        // <LoginModalForm setUser = {setUser} nav = {nav}/>
+                    }
                     <div className="currentLocation">
                         <select className="currentLocationOptions">
                             <option value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
