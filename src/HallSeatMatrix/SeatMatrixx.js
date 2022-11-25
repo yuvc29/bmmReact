@@ -48,6 +48,7 @@ console.log("alltiming = " , alltiming);
 
    const [selected_Seat_Num, setSelected_Seat_Num] = useState([]);
    const [buttonTimeId, setButtonTimeId] = useState(Selected_time);
+   const [buttonTimeShowId, setButtonTimeShowId] = useState(showId);
 
    const [ticket, setTicket] = useState({
         seats: [],
@@ -85,14 +86,14 @@ console.log("alltiming = " , alltiming);
 
    useEffect(() => {
       const fetchData = async () => {
-      let response = await GetSeatsbyShowId(showId);
+      let response = await GetSeatsbyShowId(buttonTimeShowId);
       const seatList = response.data;
 
       console.log("Seat Lists", seatList);
       setBooked(seatList);
      };
       fetchData();
-    }, []);
+    }, [buttonTimeShowId]);
 
    const PostMyOrder = async (orderObj) => {
     try {
@@ -145,8 +146,8 @@ console.log("alltiming = " , alltiming);
               orderObj: JSON.stringify(orderObj), //it's object of all info of reserveBooked Seats
 
               Selected_date: Selected_date, //Show_Item
-              Selected_time: Selected_time, //Show_Item
-              showId: showId, //Show_Item
+              Selected_time: buttonTimeId, //Show_Item
+              showId: buttonTimeShowId, //Show_Item
    }})  ;
 
     }
@@ -404,6 +405,7 @@ console.log("alltiming = " , alltiming);
                   : { background: "white", color: "#2dc492" }
               }
               onClick={() => {
+                 setButtonTimeShowId(time.showId);
                 setButtonTimeId(time.timing);
               }}
             >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MainNavbar.css';
 
 import {Avatar} from 'antd';
@@ -10,20 +10,42 @@ import SearchMovies from '../SearchMovies/SerachMovies';
 import { Link } from 'react-router-dom';
 import LoginModalForm from '../LoginModal/LoginModalForm';
 import RegisterModalForm from '../RegisterModal/RegisterModalForm'
-import axios from 'axios'
+import axios from 'axios';
+
+
 
 function Navbar({ user, setUser, nav}) {
 
+   console.log("this is  from namvae ...user is ", user);
+
+
+  const isLoggedIn = ()=>{
+    const prevUser = window.localStorage.getItem("user");
+    if(prevUser){
+        setUser(prevUser)
+        return true
+    }
+    return false
+  }
     const [searchMovie, setSearchMovie] = useState("");
+    const [cityList, setCityList] = useState([{
+        value:1,
+        label:"Mumbai"
+    },
+    {
+        value:2,
+        
+        label:"Delhi"
+    }])
 
     const HideSearch = () => {
         setSearchMovie("");
     }
 
     let show = <div className='SearchFileterfixed'>
-        <CloseOutlinedIcon onClick={HideSearch}
-            className='closeSearch' />
-        <SearchMovies />
+        {/* <CloseOutlinedIcon onClick={HideSearch}
+            className='closeSearch' /> */}
+        <SearchMovies user={user} />
     </div>
 
     const SignOut = ()=>{
@@ -33,9 +55,27 @@ function Navbar({ user, setUser, nav}) {
         // window.location.href = '/'
         console.log(response)
         setUser("")
-        window.localStorage.removeItem("isLoggedIn")
+        window.localStorage.removeItem("user");
+       
     }
 
+    useEffect(() => {
+        const fetchData = async()=>{
+            try{
+                const response = await axios.get("http://localhost:8080/city")
+                const data = response.data;
+                console.log("Cities Data " ,data);
+                // .then(response => response.json())
+                const newCities = data.map((city)=>{return {value:city.cityId, label:city.name}})
+                // setLists({ ...lists, cityList: newCities } )
+                setCityList(newCities)
+              }
+              catch(err){
+                alert("Failed to fetch cities")
+              }
+        }
+        fetchData();
+    }, []);
 
     const ShowList = () => {
         setSearchMovie(show)
@@ -63,11 +103,15 @@ function Navbar({ user, setUser, nav}) {
                 </div>
                 <div className="navbarTopRight">
                     {
-                        user && user.length ? (
+                        (user && user.length) || isLoggedIn() ? (
                             <div>
                                 <a style = {{color:'white', margin:'10px'}}>Hi {user}</a>
                                 <Avatar size={32} icon={<UserOutlined />} />
+
+                                <Link to="/">
                                 <button onClick={SignOut} className="signIn">Sign-out</button>
+                                </Link>
+                                
                             </div>
                         ): 
                         // (<button onClick={() => setShowModal(true)} className="signIn">Sign-in</button>)
@@ -79,12 +123,11 @@ function Navbar({ user, setUser, nav}) {
                     }
                     <div className="currentLocation">
                         <select className="currentLocationOptions">
-                            <option value="Delhi-NCR" className="currentLocationCity">Delhi-NCR</option>
-                            <option value="NOIDA" selected className="currentLocationCity">NOIDA</option>
-                            <option value="GAJIYABAD" className="currentLocationCity">GHAZIABAD</option>
-                            <option value="GURUGRAM" className="currentLocationCity">GURUGRAM</option>
-                            <option value="PUNJAB" className="currentLocationCity">PUNJAB</option>
-                            <option value="BIHAR" className="currentLocationCity">BIHAR</option>
+                            {
+                                cityList.map((city)=>{
+                                    return <option value ={city.value} className="currentLocationCity">{city.label}</option>
+                                })
+                            }
 
                         </select>
                     </div>

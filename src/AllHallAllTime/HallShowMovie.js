@@ -18,7 +18,10 @@ function HallShowMovies() {
     const { movieId, title, language, format, poster } = location.state;
   
      
-    const dateArray = [{date_formate: '22/11/2022'}, {date_formate: '23/11/2022'}];
+    const dateArray = [{date_formate: '2022-11-22'}, {date_formate: '2022-11-25'}];
+
+
+
     const [date_formate, setDate_formate] = useState(dateArray[0].date_formate);
 
     const [selected_seat, setselected_seat] = useState(1);
@@ -56,6 +59,8 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
           const temp = response.data;
             let finalTheatreList = [];
             setTheatreList([]);
+            
+            
 
             temp.map(async(field) =>{
                     let theatreId = 0;
@@ -94,7 +99,7 @@ const GetShowsByTheatre = async(theatreId, movieId, date) => {
 
     return (<>
 
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
 
         <div className='HallShowMovies'>
 

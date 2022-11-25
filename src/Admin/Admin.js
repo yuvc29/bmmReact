@@ -9,11 +9,11 @@
   import MovieList from './MovieList';
   import Actors from './Actors';
   import axios from 'axios';
-  
+  import AllComponent from '../AllComponent'
 
   const { Header,  Sider } = Layout;
 
-const Admin = () => {
+const Admin = ({mainNav}) => {
     
     const [collapsed, setCollapsed] = useState(false);
     const nav = useNavigate()
@@ -25,7 +25,7 @@ const Admin = () => {
         }}
       >
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <h1 style={{color:'white', fontSize: 30}}>BookMyShow</h1>
+          <h1 style={{margin:10, color:'white', fontSize: 30}}>BookMyMovie</h1>
           <Menu theme="dark" 
           onClick={({key})=>{
             if(key==="signout"){
@@ -36,8 +36,8 @@ const Admin = () => {
                 // window.location.href = '/'
                 // console.log(response)
                 // setUser("")
-                window.localStorage.removeItem("isLoggedIn")
-            
+                window.localStorage.removeItem("user")
+                mainNav("/")
             }
             else{
                 nav(key)
@@ -87,6 +87,7 @@ function Content(){
                 <Route path="movie" element = {<MovieForm/>}/>
                 <Route path="show" element = {<ShowForm/>}/>
                 <Route path="theater" element = {<TheaterForm/>}/>
+                <Route path="signout" element = {<AllComponent/>}/>
             </Routes>
         </div>
     )

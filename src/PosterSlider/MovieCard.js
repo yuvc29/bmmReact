@@ -4,17 +4,19 @@ import './MovieCard.css';
 
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import StarIcon from '@mui/icons-material/Star';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MovieDetailCard(props) {
 
+    let navigate = useNavigate();
 
-    return (
-        <div onClick={() => { alert(props.Movie.movieId) }}
-            className="carousel-item1">
+    // console.log("this is user " ,props.user);
 
-
-            <Link to='/Movie-details' state={{
+  const NavigateToDetails = ()=>{  
+   
+    if(props.user.length>0){
+            navigate("/Movie-details"
+            , {state :{
                 movieId: props.Movie.movieId,
                 title: props.Movie.title,
                 releaseDate: props.Movie.releaseDate,
@@ -28,14 +30,26 @@ function MovieDetailCard(props) {
                 poster: props.Movie.poster,
                 trailer: props.Movie.trailer,
                 language: props.Movie.language,
-                format: props.Movie.format,
+                format: props.Movie.format,  
+            }}) ;
+
+        }
+        else{
+            alert("Please login or sign-up to BookMyShow.");
+        }
+    }
+
+    return (
+        <div onClick={() => { NavigateToDetails()}}
+            className="carousel-item1">
 
 
-            }}>
+           
                 <img className="d-block_w-100"
                     src={props.Movie.poster}
-                    alt="" />
-            </Link>
+                    alt="" 
+                    />
+     
 
             <div className='carousel-item-like-icon-count'>
                 <ThumbUpAltIcon className='carousel-item-likes-Icon'></ThumbUpAltIcon>

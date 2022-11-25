@@ -9,8 +9,8 @@ function AllComponent({user, setUser, nav}) {
 
     return (<div>
 {/* <SeatSelectPage></SeatSelectPage> */}
-        <Navbar user = {user} setUser = {setUser}  nav = {nav}></Navbar>
-        <MoviesSlider></MoviesSlider>
+        {/* <Navbar user = {user} setUser = {setUser}  nav = {nav}></Navbar> */}
+        <MoviesSlider user={user}></MoviesSlider>
     </div>
     );
 }

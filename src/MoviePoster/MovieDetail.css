@@ -129,6 +129,8 @@ border-radius: 10px;
 
 .Actor_picAndName {
    margin: 0px 20px;
+   display: flex;
+   flex-direction: column;
 }
 
 .Actor_pic {

@@ -89,6 +89,8 @@ const LoginModalForm = ({setUser, nav}) => {
         }
         return error;
     };
+
+
     function loginUser(user) {
         console.log("post");
         var bodyFormData = new FormData();
@@ -109,6 +111,7 @@ const LoginModalForm = ({setUser, nav}) => {
             axios.get(`/user/email?email=${user.email}`)
             .then((response)=>{
               setUser(response.data.firstName);
+              window.localStorage.setItem("user", response.data.firstName)
               console.log(response.data.firstName);
               if(response.data.role === "admin"){
                 nav('/admin')
@@ -137,6 +140,7 @@ const LoginModalForm = ({setUser, nav}) => {
         }
       }}
     >
+
     <button onClick={showUserModal} className="signIn">Sign-in</button>
       {/* <Form {...layout} name="basicForm" onFinish={onFinish}>
         <Form.Item {...tailLayout}>

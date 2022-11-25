@@ -5,21 +5,32 @@ import axios from 'axios'
 
 const timings = [
     {
-        label:"12:00",
-        value:"12:00"
+        label:"08:00 A.M",
+        value:"08:00 A.M"
     },
     {
-        label:"03:00",
-        value:"03:00"
+        label:"11:00 A.M",
+        value:"11:00 A.M"
     },
     {
-        label:"06:00",
-        value:"06:00"
+        label:"02:00 P.M",
+        value:"02:00 P.M"
     },
     {
-        label:"09:00",
-        value:"09:00"
-    }
+        label:"06:00 P.M",
+        value:"06:00 P.M"
+    },
+     
+    {
+        label:"08:00 P.M",
+        value:"08:00 P.M"
+    },
+
+    {
+        label:"11:00 P.M",
+        value:"11:00 P.M"
+    },
+   
 ]
 
 

@@ -60,7 +60,7 @@ function MovieDetail(props) {
 
 
     return (<>
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
 
         <div className='MoviesDetails'>
 

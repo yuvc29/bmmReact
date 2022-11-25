@@ -4,8 +4,8 @@ import './MoviesSlider.css';
 import MovieCard from './MovieCard';
 
 
-function MoviesSlider() {
-
+function MoviesSlider(props) {
+   
 
 
     const [DisplayMovieArray, setDisplayMovieArray] = useState([]);
@@ -57,7 +57,7 @@ function MoviesSlider() {
                                 <div className='carousel-item1-Row'>
                                     {result[index].map((chunkmovies, chunkindex) => {
                                         return (<>
-                                            <MovieCard Movie={chunkmovies} ></MovieCard>
+                                            <MovieCard Movie={chunkmovies} user={props.user}></MovieCard>
                                         </>)
                                     })}
                                 </div>
@@ -74,7 +74,7 @@ function MoviesSlider() {
                                     {result[index].map((chunkmovies, chunkindex) => {
                                         // console.log(chunkmovies.length);
                                         return (<>
-                                            <MovieCard Movie={chunkmovies} ></MovieCard>
+                                            <MovieCard Movie={chunkmovies} user={props.user}></MovieCard>
                                         </>)
                                     })}
                                 </div>

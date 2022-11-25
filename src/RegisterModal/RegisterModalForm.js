@@ -134,7 +134,7 @@ const RegisterModalForm = ({setUser, nav}) => {
           // const data = response.data;
           // console.log("Theater Data " ,response);
           if(response.status === 200){
-              alert(response.data)
+              alert(` Hii ${response.data.firstName}, Welcome to BookMyShow !`);
               loginUser({email: user.email, password: user.password})
           }
           // .then(response => response.json())
